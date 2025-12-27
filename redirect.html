@@ -1,67 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MCD INJECTOR V6 - FN CREATIVE</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #da291c; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; color: white; text-align: center; }
-        .container { background: white; padding: 25px; border-radius: 25px; width: 85%; color: #333; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-        select { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #eee; margin: 15px 0; font-size: 14px; outline: none; }
-        .btn-inject { background: #ffbc0d; color: #222; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; text-transform: uppercase; }
-        .footer { font-size: 10px; color: #999; margin-top: 15px; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h2 style="color:#da291c; margin-top:0; font-size: 20px;">PILIH MENU INJEKSI</h2>
+<script>
+    window.onload = function() {
+        // Kita langsung set datanya tanpa tanya lisensi/password
+        var off = "272469"; 
+        var loy = "5271";
         
-        <select id="voucherSelect">
-            <option value="267611|5272">Panas 1</option>
-            <option value="272395|5271">1 Cheeseburg + 1 Small Fries</option>
-            <option value="272400|5271">1 Ayam + 1 McFloat + 1 Fries</option>
-            <option value="272404|5271">1 McFlurry + 1 French Fries</option>
-            <option value="272469|5271">4 Pcs McNugget + 1 Coca Cola</option>
-            <option value="272484|5271">1 Ayam + 1 Nasi + 1 Lemon Tea</option>
-        </select>
-        
-        <button class="btn-inject" onclick="gas()">INJECT SEKARANG</button>
-        
-        <div class="footer">
-            FN CREATIVE ENGINE v6.0<br>
-            Status: <span style="color:green;">Ready to Inject</span>
-        </div>
-    </div>
+        // Langsung arahkan ke Smart.link resmi tanpa lewat gate lisensi
+        var target = "gmalite://gmalite-smartweb?weburl=" + 
+                     encodeURIComponent("https://smart.link/2e5d9984m04hg?offer_id=" + off + "&loyalty_id=" + loy);
 
-    <script>
-        function gas() {
-            // Ambil data dari pilihan dropdown (Sistem tidak akan ID MISSING lagi)
-            const selection = document.getElementById('voucherSelect').value.split('|');
-            const off = selection[0];
-            const loy = selection[1];
-            
-            const partner = encodeURIComponent("Tiktok Live 109.4");
-            
-            // Konstruksi Link Native McD
-            const finalUrl = "gmalite://offers/details?" + 
-                             "offer_id=" + off + 
-                             "&loyalty_id=" + loy + 
-                             "&view=claim" + 
-                             "&action=redeem" + 
-                             "&is_native=true" + 
-                             "&is_mass_code=1" + 
-                             "&partner=" + partner +
-                             "&source=app_share";
-
-            // Eksekusi Tembakan
-            window.location.href = finalUrl;
-            
-            // Backup pancingan jika tidak respon
-            setTimeout(() => {
-                window.location.href = "gmalite://offers/redeem?offer_id=" + off + "&loyalty_id=" + loy + "&is_mass_code=1";
-            }, 600);
-        }
-    </script>
-</body>
-</html>
+        window.location.href = target;
+    };
+</script>
