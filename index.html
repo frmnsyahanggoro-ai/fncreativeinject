@@ -1,34 +1,4 @@
-function claimVoucher(offId, loyId, massCode) {
-    const slug = "2le1hb5pjyoo9"; 
-    const partner = "Tiktok Live 109.5";
-    
-    // 1. Tambahkan parameter sidik jari (fingerprint) agar tidak dianggap bot
-    const ts = Math.floor(Date.now() / 1000); // Timestamp saat ini
-    const clickId = Math.random().toString(36).substring(2, 15); // ID unik acak
+// FORMAT BARU: Langsung ke sistem promo tanpa lewat smart.link yang rewel
+const finalTarget = `https://www.mcdonalds.co.id/promo/detail?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1`;
 
-    // 2. Susun URL Smartlink dengan parameter yang lebih lengkap (meniru aplikasi asli)
-    // Parameter 'source', 'click_id', dan 'ts' sangat penting untuk menghindari Error 500
-    const finalTarget = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1&source=tiktok&click_id=${clickId}&ts=${ts}`;
-    
-    // 3. Gabungkan ke Deep Link
-    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
-
-    // 4. STRATEGI BYPASS ANDROID (Intent)
-    const intentLink = `intent://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}#Intent;scheme=gmalite;package=com.mcdonalds.mobileapp;S.browser_fallback_url=${encodeURIComponent(finalTarget)};end`;
-
-    const isAndroid = /Android/i.test(navigator.userAgent);
-
-    // EKSEKUSI
-    if (isAndroid) {
-        window.location.href = intentLink;
-    } else {
-        window.location.href = deepLink;
-    }
-
-    // Cadangan jika tidak merespon
-    setTimeout(function() {
-        if (!document.hidden) {
-            window.location.replace(deepLink);
-        }
-    }, 1000);
-}
+const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
