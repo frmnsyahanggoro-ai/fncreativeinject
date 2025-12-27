@@ -1,11 +1,20 @@
-function gas() {
+function inject() {
     var o = document.getElementById('o').value;
     var l = document.getElementById('l').value;
-    if(!o || !l) return alert("Isi ID!");
-
-    // JALUR MUKIDI ASLI:
-    // Jangan pakai HTTPS, langsung tembak ke protocol gmalite
-    var finalTarget = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l + "&view=claim&is_mass_code=1";
     
-    window.location.href = finalTarget;
+    // 1. Tambahkan Signature Dummy agar server tidak bingung
+    var signature = "MC" + Math.floor(Math.random() * 1000000);
+    
+    // 2. Gunakan Parameter 'Redeem' untuk memicu tombol merah
+    // Ini adalah URL yang biasanya tersembunyi (Unlisted)
+    var finalPath = "gmalite://offers/details?offer_id=" + o + 
+                    "&loyalty_id=" + l + 
+                    "&view=claim" + 
+                    "&action=redeem" + 
+                    "&is_native=true" + 
+                    "&is_mass_code=1" + 
+                    "&signature=" + signature;
+
+    // 3. Eksekusi NATIVE
+    window.location.href = finalPath;
 }
