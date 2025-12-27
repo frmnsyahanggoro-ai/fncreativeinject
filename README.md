@@ -1,4 +1,4 @@
-# Web Redirect Promo Menu 🍔
+# FN CREATIVE INJECT MCD 🍔
 
 Web sederhana ini digunakan untuk mengarahkan (redirect) pengguna langsung ke aplikasi pemesanan makanan berdasarkan **Offer ID**.
 
@@ -7,14 +7,6 @@ Untuk mengakses menu tertentu, gunakan parameter `?id=` di belakang URL.
 
 **Contoh Format:**
 `https://usernamekamu.github.io/nama-repo/?id=NOMOR_OFFER`
-
-## 📋 Daftar Menu Tersedia
-| Menu | Offer ID |
-| :--- | :--- |
-| Panas 1 | 267611 |
-| McFlurry + Kentang | 272447 |
-| Big Mac + McFlurry | 272449 |
-| 2 McSpicy + 1 Nasi + Fruit Tea | 272478 |
 
 ## 🛠️ Persyaratan
 1. Pastikan aplikasi target sudah terinstall di HP.
