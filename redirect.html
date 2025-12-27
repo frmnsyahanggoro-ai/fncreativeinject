@@ -2,49 +2,59 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processing...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SISTEM INJEKSI MUKIDI V5</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #da291c; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #ffbc0d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        p { margin-top: 20px; font-weight: bold; font-size: 14px; }
+        body { font-family: -apple-system, sans-serif; background: #da291c; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; color: white; text-align: center; }
+        .container { background: white; padding: 30px; border-radius: 30px; width: 80%; color: #333; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .btn-inject { background: #ffbc0d; color: #222; border: none; padding: 20px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .info { font-size: 12px; color: #666; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
     </style>
 </head>
 <body>
-    <div class="loader"></div>
-    <p>MENGHUBUNGKAN KE INTERNAL SERVER...</p>
+
+    <div class="container">
+        <h2 style="color:#da291c; margin-top:0;">INTERNAL AUTH</h2>
+        <p style="font-size:14px;">Voucher detected. Click button below to finalize injection.</p>
+        
+        <button class="btn-inject" onclick="finalLaunch()">CONFIRM REDEEM</button>
+        
+        <div class="info">
+            Target: <span id="display-id">Loading...</span><br>
+            Status: <span style="color:green;">Secure Connection</span>
+        </div>
+    </div>
 
     <script>
-        window.onload = function() {
-            // AMBIL DATA DARI URL (Query String)
-            const params = new URLSearchParams(window.location.search);
-            const off = params.get('offer_id');
-            const loy = params.get('loyalty_id');
+        const params = new URLSearchParams(window.location.search);
+        const off = params.get('offer_id');
+        const loy = params.get('loyalty_id');
+        document.getElementById('display-id').innerText = off;
+
+        function finalLaunch() {
+            if (!off || !loy) return alert("ID MISSING!");
+
+            // LOGIKA BYPASS MUKIDI 2025
+            // Kita pakai 'onelink' sebagai referrer palsu
             const partner = encodeURIComponent("Tiktok Live 109.4");
-
-            if (!off || !loy) {
-                document.body.innerHTML = "<h1>ERROR: ID TIDAK DITEMUKAN</h1>";
-                return;
-            }
-
-            // KONSTRUKSI LINK INJEKSI
-            const deepLink = "gmalite://offers/details?" + 
+            const finalUrl = "gmalite://offers/details?" + 
                              "offer_id=" + off + 
                              "&loyalty_id=" + loy + 
-                             "&view=claim&is_mass_code=1&is_native=true" +
-                             "&action=redeem&partner=" + partner;
+                             "&view=claim" + 
+                             "&action=redeem" + 
+                             "&is_native=true" + 
+                             "&is_mass_code=1" + 
+                             "&partner=" + partner +
+                             "&source=app_share"; // Parameter tambahan 2025
 
-            // EKSEKUSI REDIRECT (Teknik Mukidi)
-            setTimeout(function() {
-                window.location.replace(deepLink);
-            }, 1500);
-
-            // FALLBACK: Balik ke Home jika Stuck
-            setTimeout(function() {
-                window.location.replace("gmalite://home");
-            }, 4000);
-        };
+            // Tembak langsung
+            window.location.href = finalUrl;
+            
+            // Backup jika tetap diam
+            setTimeout(() => {
+                window.location.href = "gmalite://offers/redeem?offer_id=" + off + "&loyalty_id=" + loy;
+            }, 500);
+        }
     </script>
 </body>
 </html>
