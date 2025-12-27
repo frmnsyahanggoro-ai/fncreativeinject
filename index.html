@@ -3,74 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>McD Injector Panel</title>
+    <title>McD Admin Panel</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f4f4f4; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .panel { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
-        .logo { width: 60px; margin-bottom: 15px; }
-        h2 { margin: 0 0 20px 0; color: #333; font-size: 18px; }
-        .input-group { text-align: left; margin-bottom: 15px; }
-        label { display: block; font-size: 12px; font-weight: bold; color: #666; margin-bottom: 5px; text-transform: uppercase; }
-        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
-        input:focus { border-color: #da291c; }
-        .btn-inject { background: #da291c; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 10px rgba(218, 41, 28, 0.3); }
-        .btn-inject:active { transform: scale(0.98); }
-        .footer { margin-top: 20px; font-size: 11px; color: #999; }
+        body { font-family: -apple-system, sans-serif; background: #eef2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: #ffffff; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 90%; max-width: 360px; text-align: center; }
+        .logo { width: 60px; margin-bottom: 20px; }
+        h2 { margin: 0 0 25px 0; color: #333; font-weight: 700; }
+        .input-box { text-align: left; margin-bottom: 15px; }
+        label { display: block; font-size: 12px; font-weight: 700; color: #da291c; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        input { width: 100%; padding: 15px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; transition: all 0.3s; background: #fafafa; }
+        input:focus { border-color: #da291c; background: #fff; }
+        .btn-go { background: #da291c; color: #fff; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 15px; box-shadow: 0 5px 15px rgba(218, 41, 28, 0.3); }
+        .btn-go:active { transform: scale(0.96); }
     </style>
 </head>
 <body>
 
-    <div class="panel">
+    <div class="box">
         <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" class="logo">
-        <h2>Custom Injector</h2>
+        <h2>Panel Injector</h2>
 
-        <div class="input-group">
+        <div class="input-box">
             <label>Offer ID</label>
-            <input type="number" id="offId" placeholder="Contoh: 272469" inputmode="numeric">
+            <input type="number" id="off" placeholder="Masukkan Offer ID" pattern="\[0-9]*">
         </div>
 
-        <div class="input-group">
+        <div class="input-box">
             <label>Loyalty ID</label>
-            <input type="number" id="loyId" placeholder="Contoh: 5271" inputmode="numeric">
+            <input type="number" id="loy" placeholder="Masukkan Loyalty ID" pattern="\[0-9]*">
         </div>
 
-        <button class="btn-inject" onclick="prosesInject()">DIRECT INJECT</button>
-        
-        <div class="footer">
-            Pastikan aplikasi McD sudah Login sebelum menekan tombol.
-        </div>
+        <button class="btn-go" onclick="eksekusi()">INJECT SEKARANG</button>
     </div>
 
     <script>
-        function prosesInject() {
-            var offId = document.getElementById('offId').value;
-            var loyId = document.getElementById('loyId').value;
+        function eksekusi() {
+            var o = document.getElementById('off').value;
+            var l = document.getElementById('loy').value;
 
-            if (!offId || !loyId) {
-                alert("Harap isi Offer ID dan Loyalty ID!");
+            if (o == "" || l == "") {
+                alert("Isi kedua ID dulu!");
                 return;
             }
 
-            // TEKNIK MUKIDI: Direct Reward Path
-            // Menembak langsung ke modul Reward agar tidak butuh Mass Code
-            var targetUrl = "https://www.mcdonalds.co.id/rewards/details?offer_id=" + offId + 
-                            "&loyalty_id=" + loyId + 
-                            "&view=claim&action=redeem&is_native=true";
+            // Jalur Direct Smartweb (Meniru Web Mukidi)
+            var target = "https://www.mcdonalds.co.id/rewards/details?offer_id=" + o + "&loyalty_id=" + l + "&view=claim";
+            var inject = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(target);
 
-            // Deep Link Scheme
-            var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(targetUrl);
+            // Eksekusi Buka Aplikasi
+            window.location.href = inject;
 
-            // Eksekusi 1: Pemicu Webview
-            window.location.href = finalLink;
-
-            // Eksekusi 2: Pemicu Native (Jeda 1.2 detik)
-            // Ini untuk memastikan modul klaim muncul meskipun webview lambat
+            // Cadangan Jalur Native jika weburl tidak memicu tombol
             setTimeout(function() {
                 if (!document.hidden) {
-                    var nativePath = "gmalite://loyalty/details?offer_id=" + offId + "&loyalty_id=" + loyId;
-                    window.location.href = nativePath;
+                    window.location.href = "gmalite://loyalty/details?offer_id=" + o + "&loyalty_id=" + l;
                 }
-            }, 1200);
+            }, 1000);
         }
     </script>
 
