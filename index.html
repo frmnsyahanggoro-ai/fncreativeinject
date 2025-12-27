@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Promo</title>
+    <title>McD Redirect Fix</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
-        .card { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 80%; }
-        .btn { display: block; margin-top: 20px; padding: 15px; background: #db3434; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
+        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border-top: 6px solid #ffbc0d; max-width: 320px; }
+        .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 50px; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h3>Promo McD</h3>
-        <p id="info">Klik tombol di bawah untuk membuka promo</p>
-        <a href="#" id="link-mcd" class="btn">BUKA PROMO</a>
+        <h3>Membuka Promo McD...</h3>
+        <p id="menu-name">Menghubungkan ke Aplikasi</p>
+        <a href="#" id="open-btn" class="btn">BUKA DI APLIKASI</a>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
-        const loyalty = "5271";
+        const display = document.getElementById('menu-name');
+        const btn = document.getElementById('open-btn');
 
         if (id) {
-            // Kita gunakan format link HTTPS mcd.com yang paling standar
-            const finalURL = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${loyalty}`;
-            document.getElementById('link-mcd').href = finalURL;
+            display.innerText = "Membuka Offer ID: " + id;
             
-            // Coba buka otomatis sekali saja
-            window.location.href = finalURL;
+            // SKEMA YANG DIGUNAKAN WEB SEBELAH (Mukidi)
+            // Format: gmalite://gmalite-smartweb?weburl=https://smart.link/...
+            // Kita bungkus ID kamu ke dalam smart link McD
+            const targetUrl = `https://smart.link/2e5d9984m04hg?offerId=${id}`;
+            const finalDeepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(targetUrl)}`;
+            
+            btn.href = finalDeepLink;
+
+            // Eksekusi otomatis
+            setTimeout(() => {
+                window.location.href = finalDeepLink;
+            }, 1000);
+            
         } else {
-            document.getElementById('info').innerText = "ID Promo tidak ditemukan.";
+            display.innerText = "ID tidak ditemukan.";
+            btn.style.display = "none";
         }
     </script>
 </body>
