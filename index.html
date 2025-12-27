@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Injeksi</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px 20px; background: #da291c; color: white; }
-        .btn { background: #ffbc0d; color: #222; border: none; padding: 20px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 18px; text-decoration: none; display: block; }
+        body { font-family: sans-serif; text-align: center; padding: 50px 20px; background: #222; color: white; }
+        .btn { background: #ffbc0d; color: #222; border: none; padding: 20px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h2>MCD LAUNCHER</h2>
-    <p>Klik tombol di bawah untuk masuk aplikasi.</p>
-    <button class="btn" onclick="launch()">MASUK KE APLIKASI</button>
+    <p>Gunakan Safari untuk hasil maksimal.</p>
+    
+    <button class="btn" onclick="launch()">BUKA PANEL INTERNAL</button>
 
     <script>
         function launch() {
-            // GANTI USERNAME DAN REPO-NAME SESUAI AKUNMU
-            var linkPanel = "https://USERNAME.github.io/REPO-NAME/panel.html"; 
-            var trigger = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(linkPanel);
+            // GANTI INI dengan URL panel.html milikmu nanti
+            var myFolder = window.location.href.replace('index.html', '');
+            var panelUrl = myFolder + "panel.html";
+            
+            // Menggunakan Deep Link langsung tanpa embel-embel domain orang lain
+            var trigger = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(panelUrl);
+            
             window.location.href = trigger;
         }
     </script>
