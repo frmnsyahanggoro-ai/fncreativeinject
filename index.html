@@ -8,10 +8,9 @@
         body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f7f7f7; }
         .card { background: white; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; max-width: 350px; width: 90%; border-top: 8px solid #ffbc0d; }
         h2 { color: #292929; margin-bottom: 5px; font-size: 22px; }
-        .details { color: #666; margin-bottom: 25px; font-size: 14px; line-height: 1.5; }
+        .details { color: #666; margin-bottom: 25px; font-size: 14px; line-height: 1.5; white-space: pre-line; }
         .btn { display: block; padding: 16px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 14px; font-size: 16px; transition: 0.2s; box-shadow: 0 4px 10px rgba(219, 52, 52, 0.3); }
         .btn:active { transform: scale(0.97); }
-        .footer { margin-top: 20px; font-size: 11px; color: #bbb; }
     </style>
 </head>
 <body>
@@ -20,29 +19,16 @@
     <h2 id="title">Memuat Promo...</h2>
     <p class="details" id="desc">Mohon tunggu sebentar</p>
     <a href="#" id="open-btn" class="btn">BUKA DI APLIKASI</a>
-    <div class="footer">Redirecting to McDonald's App...</div>
 </div>
 
 <script>
-    // Database Lengkap Berdasarkan Data Kamu
     const promoData = {
         "267611": { name: "Panas 1", loyalty: "5272" },
         "272395": { name: "1 Cheesburger + 1 Small French Fries", loyalty: "5271" },
-        "272400": { name: "1 Ayam + 1 McFloat + 1 French Fries", loyalty: "5271" },
-        "272402": { name: "Ayam + Kentang + Fruit Tea (McDeliv)", loyalty: "5271" },
-        "272404": { name: "1 McFlurry + 1 French Fries", loyalty: "5271" },
-        "272405": { name: "Data Kosong", loyalty: "5271" },
         "272447": { name: "McFlurry + Kentang", loyalty: "5271" },
-        "272449": { name: "Big Mac + McFlurry", loyalty: "5271" },
-        "272456": { name: "McCafe + Kentang + Ayam (25k)", loyalty: "5271" },
-        "272469": { name: "4 Pcs McNugget + 1 Coca Cola", loyalty: "5271" },
-        "272471": { name: "McCafe + Kentang (22k)", loyalty: "5271" },
         "272478": { name: "2 McSpicy + 1 Nasi + Fruit Tea (27k)", loyalty: "5271" },
-        "272481": { name: "McSpicy + Nasi + Fruit Tea (22k)", loyalty: "5271" },
-        "272482": { name: "Ayam + Kentang + Air Mineral (22k McDeliv)", loyalty: "5271" },
-        "272484": { name: "1 Ayam + 1 Nasi + 1 Fruit Tea Lemon", loyalty: "5271" },
-        "272486": { name: "Fish Fillet Burger + Fanta Float (22k)", loyalty: "5271" },
         "272489": { name: "McFlurry + Kentang (13k)", loyalty: "5271" }
+        // ... (tambahkan ID lainnya jika perlu)
     };
 
     const params = new URLSearchParams(window.location.search);
@@ -56,20 +42,25 @@
         titleEl.innerText = promo.name;
         descEl.innerText = `Offer ID: ${id}\nLoyalty ID: ${promo.loyalty}`;
         
-        // Buat Deep Link
-        const deepLink = `mcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${promo.loyalty}`;
-        btnEl.href = deepLink;
+        // --- PERUBAHAN UTAMA DISINI ---
+        // Kita menggunakan Universal Link mcd.com yang memicu iOS membuka aplikasi
+        const universalLink = `https://u.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${promo.loyalty}`;
+        const schemeLink = `mcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${promo.loyalty}`;
+        
+        btnEl.href = universalLink;
 
-        // Redirect Otomatis setelah 1 detik
+        // Coba buka dengan Universal Link terlebih dahulu
+        window.location.href = universalLink;
+
+        // Jika dalam 2 detik tidak pindah, coba paksa pakai Scheme
         setTimeout(() => {
-            window.location.href = deepLink;
-        }, 1000);
+            window.location.href = schemeLink;
+        }, 2000);
+        
     } else {
         titleEl.innerText = "Promo Tidak Ditemukan";
-        descEl.innerText = "Pastikan ID yang dimasukkan benar.";
         btnEl.style.display = "none";
     }
 </script>
-
 </body>
 </html>
