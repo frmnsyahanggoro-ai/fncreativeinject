@@ -17,30 +17,28 @@
 <div class="card">
     <div class="loader"></div>
     <h2 style="color: #333; font-size: 20px; margin: 0;">Menghubungkan...</h2>
-    <p style="color: #666; font-size: 14px; margin-top: 10px;">Sedang menyuntikkan voucher ke aplikasi McDonald's.</p>
+    <p style="color: #666; font-size: 14px; margin-top: 10px;">Mengalihkan langsung ke promo di aplikasi McDonald's.</p>
     
-    <button onclick="gas()" class="btn-mcd">BUKA VOUCHER</button>
+    <a href="https://smart.link/2e5d9984m04hg?offerId=272489&loyaltyId=5271" class="btn-mcd" id="gasBtn">KLAIM VOUCHER</a>
 </div>
 
 <script>
-    function gas() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const offerId = urlParams.get('id') || '272489';
-        
-        // JALUR 1: Internal App Scheme (Tanpa butuh Server/Internet)
-        const scheme = "mcdonalds://GMA/OfferDetails?offerId=" + offerId + "&loyaltyId=5271";
-        
-        // JALUR 2: Alternatif GmaLite
-        const gma = "gmalite://GMA/OfferDetails?offerId=" + offerId;
+    // Ambil ID dari URL jika ada
+    const urlParams = new URLSearchParams(window.location.search);
+    const offerId = urlParams.get('id') || '272489';
+    const btn = document.getElementById('gasBtn');
+    
+    // Set link final
+    const finalLink = "https://smart.link/2e5d9984m04hg?offerId=" + offerId + "&loyaltyId=5271";
+    btn.href = finalLink;
 
-        // Eksekusi langsung ke aplikasi
-        window.location.href = scheme;
-
-        // Jika dalam 1 detik aplikasi tidak terbuka, coba skema cadangan
+    // Tambahkan event listener untuk menangani error Safari
+    btn.addEventListener('click', function(e) {
+        // Jika dalam 500ms tidak pindah aplikasi, coba cara alternatif
         setTimeout(function() {
-            window.location.href = gma;
-        }, 1000);
-    }
+            window.location.href = "https://u.mcd.com/app/offer-details?offerId=" + offerId;
+        }, 500);
+    });
 </script>
 
 </body>
