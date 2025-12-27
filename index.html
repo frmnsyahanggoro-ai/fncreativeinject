@@ -1,63 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Menu Voucher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klaim Voucher</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f4f4f4; text-align: center; padding: 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h3 { font-size: 14px; color: #333; margin: 0 0 10px 0; height: 35px; overflow: hidden; }
-        .btn { background: #da291c; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; font-size: 14px; }
-        .logo { width: 50px; margin-bottom: 20px; }
+        body { font-family: sans-serif; text-align: center; background: #eeeeee; padding: 20px; }
+        .container { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn { background: #da291c; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: 10px; font-size: 16px; cursor: pointer; }
+        h2 { color: #333; font-size: 18px; }
+        .item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
     </style>
 </head>
 <body>
 
-    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" class="logo">
-    <div class="grid">
-        <div class="card">
-            <h3>Panas 1</h3>
-            <button class="btn" onclick="gas('267611', '5272')">INJEK</button>
-        </div>
-        <div class="card">
-            <h3>4 Pcs McNugget</h3>
-            <button class="btn" onclick="gas('272469', '5271')">INJEK</button>
-        </div>
-        <div class="card">
-            <h3>Ayam + Nasi</h3>
-            <button class="btn" onclick="gas('272484', '5271')">INJEK</button>
-        </div>
-        <div class="card">
-            <h3>McFlurry</h3>
-            <button class="btn" onclick="gas('272404', '5271')">INJEK</button>
-        </div>
+<div class="container">
+    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50">
+    <h2>Pilih Menu Injeksi</h2>
+
+    <div class="item">
+        <p>4 Pcs McNugget + Cola</p>
+        <button class="btn" onclick="injek('272469', '5271')">INJEK SEKARANG</button>
     </div>
 
-    <script>
-        function gas(offId, loyId) {
-            var mCode = "PaketNgemil12";
-            var partner = encodeURIComponent("Tiktok Live 109.5");
-            
-            // 1. Jalur Utama: Langsung pancing Menu REDEEM (Klaim)
-            var pathRedeem = "gmalite://offers/redeem?offer_id=" + offId + "&loyalty_id=" + loyId + "&code=" + mCode + "&is_mass_code=1&partner=" + partner;
-            
-            // 2. Jalur Pendukung: Validasi sesi webview
-            var pathWeb = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent("https://www.mcdonalds.co.id/offers/details?offer_id=" + offId + "&view=claim");
+    <div class="item">
+        <p>Ayam + Nasi + Lemon Tea</p>
+        <button class="btn" onclick="injek('272484', '5271')">INJEK SEKARANG</button>
+    </div>
+</div>
 
-            // EKSEKUSI
-            window.location.href = pathRedeem;
-
-            // Jeda sebentar untuk kirim validasi kedua agar tombol muncul
-            setTimeout(function() {
-                var iframe = document.createElement("iframe");
-                iframe.style.display = "none";
-                iframe.src = pathWeb;
-                document.body.appendChild(iframe);
-            }, 1000);
-        }
-    </script>
-
-</body>
-</html>
+<script>
+    function injek(offId, loyId) {
+        // Data Dasar
+        var kode = "PaketNgemil12";
+        var partner = "Tiktok Live 109.5";
+        
+        // JALUR 1: Memaksa Menu Klaim (Redeem) muncul di aplikasi
+        var linkNative = "gmalite://offers/redeem?offer_id=" + offId + "&loyalty_id
