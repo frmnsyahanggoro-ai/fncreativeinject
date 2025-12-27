@@ -1,4 +1,36 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Injeksi Mukidi</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px 20px; background: #da291c; color: white; }
+        .btn-start { background: #ffbc0d; color: #222; border: none; padding: 20px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 18px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="80">
+    <h2>MCD INJECTOR V1</h2>
+    <p>Klik tombol di bawah untuk membuka panel di dalam aplikasi.</p>
+
+    <button class="btn-start" onclick="bukaApp()">MASUK KE APLIKASI</button>
+
+    <script>
+        function bukaApp() {
+            // Gantilah 'https://domain-anda.com/panel.html' dengan link asli file panel Anda
+            var urlPanel = "https://domain-anda.com/panel.html"; 
+            
+            // Perintah untuk membuka aplikasi McD dan memuat panel di dalamnya
+            var trigger = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(urlPanel);
+            
+            window.location.href = trigger;
+        }
+    </script>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
