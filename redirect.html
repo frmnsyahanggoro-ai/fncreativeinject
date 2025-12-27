@@ -2,50 +2,64 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BYPASS SANDBOX MODE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM OVERRIDE</title>
     <style>
-        body { font-family: sans-serif; background: #eee; padding: 20px; text-align: center; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        h3 { color: #da291c; margin-top: 0; }
-        
-        /* Gaya Tombol yang Agresif */
-        .btn { 
-            display: block; 
-            background: #ffbc0d; 
-            color: black; 
-            text-decoration: none; 
-            padding: 15px; 
-            margin: 10px 0; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            font-size: 16px;
-            border-bottom: 4px solid #d49c0a;
-        }
-        .btn:active { border-bottom: 0; transform: translateY(4px); }
+        body { background: #000; color: #0f0; font-family: monospace; text-align: center; padding-top: 50px; }
+        .log { border: 1px solid #0f0; padding: 10px; margin: 20px; font-size: 12px; }
     </style>
 </head>
 <body>
+    <h2>INJECTION PROCESS</h2>
+    <div id="status" class="log">Initializing...</div>
 
-<div class="card">
-    <h3>PILIH MENU & GAS!</h3>
-    <p style="font-size:12px; color:#555;">Jika diklik diam, tekan tahan lalu pilih 'Open'.</p>
+    <script>
+        // DAFTAR ID EMAS KAMU
+        var offers = {
+            "nugget": "272469|5271",
+            "panas1": "267611|5272",
+            "ayam": "272484|5271"
+        };
 
-    <a class="btn" target="_blank" href="gmalite://offers/details?offer_id=267611&loyalty_id=5272&view=claim&action=redeem&is_native=true&is_mass_code=1">
-        🔥 PANAS 1
-    </a>
+        // Ganti ini sesuai menu yang mau ditembak (nugget / panas1 / ayam)
+        var targetMenu = "nugget"; 
 
-    <a class="btn" target="_blank" href="gmalite://offers/details?offer_id=272484&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
-        🍗 AYAM + NASI
-    </a>
+        function log(txt) {
+            document.getElementById('status').innerHTML += "<br>" + txt;
+        }
 
-    <a class="btn" target="_blank" href="gmalite://offers/details?offer_id=272469&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
-        🍟 MCNUGGET
-    </a>
+        function inject() {
+            var data = offers[targetMenu].split('|');
+            var off = data[0];
+            var loy = data[1];
 
-    <br>
-    <a href="gmalite://home" target="_blank" style="font-size:10px; color:#999;">Kembali ke Home</a>
-</div>
+            log("Target Locked: " + off);
 
+            // TEKNIK IFRAME: Memuat link di background
+            // Ini membypass deteksi "Browser Referrer"
+            var frame = document.createElement('iframe');
+            
+            // Gunakan path '/reward/claim' yang lebih agresif dari '/offers/details'
+            var deepLink = "gmalite://reward/claim?offer_id=" + off + 
+                           "&loyalty_id=" + loy + 
+                           "&view=claim&action=redeem&is_native=true&is_mass_code=1" +
+                           "&source=push_notification"; // Pura-pura dari notifikasi
+
+            frame.style.display = 'none';
+            frame.src = deepLink;
+            
+            document.body.appendChild(frame);
+            log("Payload Sent via Iframe.");
+
+            // Cadangan: Tembak via Window Location setelah 1 detik
+            setTimeout(function() {
+                log("Force Launching...");
+                window.location.href = deepLink;
+            }, 1000);
+        }
+
+        // Jalankan otomatis
+        setTimeout(inject, 500);
+    </script>
 </body>
 </html>
