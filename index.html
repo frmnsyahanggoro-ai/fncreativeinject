@@ -3,59 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Redirector</title>
+    <title>McD Promo Redirect</title>
     <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border-top: 6px solid #ffbc0d; max-width: 320px; }
-        .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 50px; }
+        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f8f8f8; }
+        .card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; border-top: 8px solid #ffbc0d; width: 85%; max-width: 320px; }
+        .btn { display: block; margin-top: 25px; padding: 15px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(219, 52, 52, 0.3); }
     </style>
 </head>
 <body>
     <div class="card">
-        <h3 id="title">Membuka Promo...</h3>
-        <p id="menu-name">Menghubungkan ke Aplikasi McD</p>
-        <a href="#" id="manual-link" class="btn">BUKA SEKARANG</a>
+        <h3 id="status">Membuka Aplikasi...</h3>
+        <p id="menu" style="font-size: 14px; color: #666;">Mohon tunggu sebentar</p>
+        <a href="#" id="go" class="btn">KLIK JIKA TIDAK TERBUKA</a>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
-        const display = document.getElementById('menu-name');
-        const btn = document.getElementById('manual-link');
-
-        // Gunakan Loyalty ID 5271 sebagai default jika tidak ditentukan
-        const loyaltyId = "5271";
-
+        const loyalty = "5271"; // Default loyalty ID kamu
+        
         if (id) {
-            display.innerText = "Mencoba membuka Offer ID: " + id;
+            document.getElementById('menu').innerText = "ID Promo: " + id;
             
-            // Daftar skema alamat yang paling mungkin berhasil (GMA Indonesia)
-            const links = [
-                `globalmcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${loyaltyId}`,
-                `mcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${loyaltyId}`,
-                `https://go.mcd.com/app/offer-details?offerId=${id}`,
-                `mcdonalds://offers/details/${id}`
-            ];
-
-            function tryAllLinks() {
-                links.forEach((link, index) => {
-                    setTimeout(() => {
-                        window.location.href = link;
-                    }, index * 800); // Mencoba satu per satu setiap 0.8 detik
-                });
-            }
-
-            btn.onclick = (e) => {
-                e.preventDefault();
-                tryAllLinks();
-            };
-
-            // Jalankan otomatis
-            setTimeout(tryAllLinks, 1000);
+            // FORMAT TERKUAT: Menggunakan link HTTPS resmi yang terdaftar di sistem iOS
+            // Jika link ini dibuka di Safari, iOS secara otomatis akan bertanya "Open in McDonald's?"
+            const finalLink = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${loyalty}`;
             
-        } else {
-            display.innerText = "Error: ID tidak ditemukan.";
-            btn.style.display = "none";
+            document.getElementById('go').href = finalLink;
+
+            // Eksekusi otomatis
+            window.location.replace(finalLink);
         }
     </script>
 </body>
