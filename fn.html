@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FN DASHBOARD</title>
+    <title>FN DASHBOARD - DIRECT</title>
     <style>
-        body { font-family: sans-serif; background: #fff; padding: 20px; text-align: center; }
-        .box { border: 2px solid #da291c; border-radius: 15px; padding: 20px; margin-top: 20px; }
-        h2 { color: #da291c; margin: 0; }
-        p { font-size: 12px; color: #666; }
+        body { font-family: -apple-system, sans-serif; background: #fff; padding: 20px; text-align: center; }
+        .box { border: 2px solid #da291c; border-radius: 15px; padding: 20px; margin-top: 10px; }
+        h2 { color: #da291c; margin: 0; font-weight: 900; }
+        p { font-size: 11px; color: #999; margin-bottom: 20px; }
         
-        /* Tombol Gaya Baru */
+        /* TOMBOL SEBAGAI LINK (ANCHOR) */
         .btn { 
             display: block; width: 100%; padding: 15px 0; margin: 10px 0;
             background: #ffbc0d; color: #000; font-weight: 800; 
             text-decoration: none; border-radius: 50px; font-size: 14px;
-            box-shadow: 0 4px 0 #d49c0a; cursor: pointer; border: none;
+            box-shadow: 0 4px 0 #d49c0a; 
         }
         .btn:active { transform: translateY(4px); box-shadow: none; }
     </style>
@@ -24,49 +24,37 @@
 
     <div class="box">
         <h2>FN CREATIVE</h2>
-        <p>Status: <span style="color:green">CONNECTED</span></p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+        <p>MODE: DIRECT INJECTION (RAW LINK)</p>
 
-        <button class="btn" onclick="tembak('https://tinyurl.com/3vu8tsud')">
+        <a class="btn" href="gmalite://offers/details?offer_id=267611&loyalty_id=5272&view=claim&action=redeem&is_native=true&is_mass_code=1">
             🔥 CLAIM PANAS 1
-        </button>
+        </a>
 
-        <button class="btn" onclick="tembak('https://tinyurl.com/mrxex48b')">
+        <a class="btn" href="gmalite://offers/details?offer_id=272395&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
             🍔 CLAIM BURGER
-        </button>
+        </a>
 
-        <button class="btn" onclick="tembak('https://tinyurl.com/25f2tcrv')">
+        <a class="btn" href="gmalite://offers/details?offer_id=272469&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
             🍟 CLAIM NUGGET
-        </button>
+        </a>
         
-         <button class="btn" onclick="tembak('https://tinyurl.com/238ymdyx')">
-            🥤 CLAIM MCFLOAT
-        </button>
+        <a class="btn" href="gmalite://offers/details?offer_id=272400&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
+             🥤 CLAIM MCFLOAT
+        </a>
 
-         <button class="btn" onclick="tembak('https://tinyurl.com/48nben8r')">
-            🍦 CLAIM MCFLURRY
-        </button>
+         <a class="btn" href="gmalite://offers/details?offer_id=272404&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
+             🍦 CLAIM MCFLURRY
+        </a>
 
-         <button class="btn" onclick="tembak('https://tinyurl.com/59c788cf')">
-            🍚 CLAIM AYAM NASI
-        </button>
+         <a class="btn" href="gmalite://offers/details?offer_id=272484&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">
+             🍚 CLAIM AYAM NASI
+        </a>
 
     </div>
+    
+    <div style="margin-top:20px; font-size:10px; color:#ccc;">
+        Tip: Jika diklik diam, tekan tahan tombol lalu pilih 'Open'.
+    </div>
 
-    <script>
-        function tembak(linkVoucher) {
-            // PERUBAHAN PENTING:
-            // Kita tidak pakai 'gmalite-smartweb' lagi di sini.
-            // Kita langsung suruh window ini menuju Link TinyURL.
-            // TinyURL nanti yang akan melempar 'gmalite://' ke sistem.
-            
-            window.location.href = linkVoucher;
-            
-            // Backup Plan: Jika dalam 1 detik diam saja, kita paksa buka di tab baru
-            setTimeout(function(){
-                window.open(linkVoucher, '_blank');
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
