@@ -1,47 +1,15 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Redirect Aman</title>
-    <style>
-        body { font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f9f9f9; }
-        .box { text-align: center; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #ffbc0d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        h1 { font-size: 18px; color: #333; }
-    </style>
+    <title>Promo</title>
 </head>
 <body>
-
-<div class="box">
-    <div class="spinner"></div>
-    <h1>Memverifikasi Koneksi...</h1>
-    <p style="color: #888; font-size: 14px;">Mohon tunggu, jangan tutup jendela ini.</p>
-</div>
-
-<script>
-    /* KODE INI BERSIH 100% 
-       Tidak menghubungi server whitelist-bot.com atau mukidi.
-    */
-    (function() {
-        // Alamat tujuan akhir (Deep Link Aplikasi)
-        const linkTujuan = "gmalite://gmalite-smartweb?weburl=https://smart.link/2e5d9984m04hg";
-
-        // Fungsi Redirect
-        function jalankanRedirect() {
-            // Cek apakah user pakai HP (karena link gmalite:// hanya ada di HP)
-            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                window.location.replace(linkTujuan);
-            } else {
-                // Jika buka di Laptop, lempar ke Google (biar aman dari deteksi admin)
-                window.location.replace("https://www.google.com");
-            }
-        }
-
-        // Jalankan otomatis setelah 2 detik
-        setTimeout(jalankanRedirect, 2000);
-    })();
-</script>
+    <script>
+        // Versi paling pendek, mustahil ada lisensi tersembunyi
+        window.onload = function() {
+            var target = "gmalite://gmalite-smartweb?weburl=https://smart.link/2e5d9984m04hg";
+            window.location.replace(target);
+        };
+    </script>
 </body>
 </html>
