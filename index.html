@@ -3,51 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Promo McDonald's Indonesia</title>
     <style>
         body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #ffffff; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #ffbc0d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .container { text-align: center; padding: 20px; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #ffbc0d; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .container { text-align: center; }
-        .btn-inject { display: inline-block; padding: 12px 24px; background: #db3434; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; display: none; }
+        .btn-mcd { display: inline-block; padding: 15px 30px; background: #db3434; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 10px; box-shadow: 0 4px 15px rgba(219,52,52,0.3); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="loader" id="loader"></div>
-    <h3 id="msg">Membuka Promo McD...</h3>
-    <a href="#" id="inject-link" class="btn-inject">BUKA MANUAL</a>
+    <div class="loader"></div>
+    <h3>Mengarahkan ke Aplikasi McD...</h3>
+    <p id="info" style="color: #666; font-size: 14px;">Jika aplikasi tidak terbuka otomatis,<br>silakan klik tombol di bawah:</p>
+    <a href="#" id="final-link" class="btn-mcd">BUKA PROMO SEKARANG</a>
 </div>
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    const offerId = params.get('id');
-    const loyaltyId = "5271"; // Menggunakan ID yang paling umum dari data kamu
+    const id = params.get('id');
+    const loyalty = "5271";
 
-    if (offerId) {
-        // Skema yang paling ampuh untuk aplikasi McD Indonesia terbaru
+    if (id) {
+        // Ini adalah skema 'GMA Lite' yang terbukti berhasil di web referensi kamu
         const smartLink = "https://smart.link/2e5d9984m04hg";
-        const finalUrl = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(smartLink + '?offerId=' + offerId + '&loyaltyId=' + loyaltyId)}`;
+        const targetUrl = `${smartLink}?offerId=${id}&loyaltyId=${loyalty}`;
+        const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(targetUrl)}`;
         
-        const injectBtn = document.getElementById('inject-link');
-        injectBtn.href = finalUrl;
-        injectBtn.style.display = 'inline-block';
+        const btn = document.getElementById('final-link');
+        btn.href = deepLink;
 
-        // Logika Redirect: Coba buka otomatis dalam 1 detik
+        // Eksekusi pengalihan otomatis
         setTimeout(() => {
-            window.location.href = finalUrl;
-            
-            // Jika 2 detik kemudian masih di halaman ini, beri tahu user
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('msg').innerText = "Jika aplikasi tidak terbuka, klik tombol di bawah:";
-            }, 2000);
-        }, 1000);
-
+            window.location.href = deepLink;
+        }, 500);
     } else {
-        document.getElementById('msg').innerText = "ID Promo tidak ditemukan.";
-        document.getElementById('loader').style.display = 'none';
+        document.getElementById('info').innerText = "Silakan gunakan ID Promo yang valid.";
     }
 </script>
 
