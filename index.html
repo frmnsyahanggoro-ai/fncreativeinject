@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>Membuka Promo McD...</h3>
+        <p id="menu-name">Mohon tunggu sebentar</p>
+    </div>
+
+    <script>
+        // Database Offer ID sesuai README kamu
+        const offers = {
+            "267611": "Panas 1",
+            "272447": "McFlurry + Kentang",
+            "272449": "Big Mac + McFlurry",
+            "272478": "2 McSpicy + 1 Nasi + Fruit Tea"
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const display = document.getElementById('menu-name');
+
+        if (id && offers[id]) {
+            display.innerText = "Menu: " + offers[id];
+            // Link Deep Link (Hasil Sniffing HTTP Toolkit)
+            const deepLink = "mcdonalds://offers/details?offerId=" + id;
+            
+            setTimeout(() => {
+                window.location.href = deepLink;
+            }, 1000);
+        } else {
+            display.innerText = "ID Promo tidak ditemukan atau salah.";
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>Membuka Promo McD...</h3>
+        <p id="menu-name">Mohon tunggu sebentar</p>
+    </div>
+
+    <script>
+        // Database Offer ID sesuai README kamu
+        const offers = {
+            "267611": "Panas 1",
+            "272447": "McFlurry + Kentang",
+            "272449": "Big Mac + McFlurry",
+            "272478": "2 McSpicy + 1 Nasi + Fruit Tea"
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const display = document.getElementById('menu-name');
+
+        if (id && offers[id]) {
+            display.innerText = "Menu: " + offers[id];
+            // Link Deep Link (Hasil Sniffing HTTP Toolkit)
+            const deepLink = "mcdonalds://offers/details?offerId=" + id;
+            
+            setTimeout(() => {
+                window.location.href = deepLink;
+            }, 1000);
+        } else {
+            display.innerText = "ID Promo tidak ditemukan atau salah.";
+        }
+    </script>
+</body>
+</html>
