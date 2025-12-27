@@ -3,43 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #FFBC0D; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 40px 20px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #DB3434; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn-mcd { display: block; padding: 18px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 17px; margin-top: 20px; border: none; width: 100%; cursor: pointer; }
-    </style>
+    <title>McD Promo Injector</title>
 </head>
-<body>
-
-<div class="card">
-    <div class="loader"></div>
-    <h2 style="color: #333; font-size: 20px; margin: 0;">Menghubungkan...</h2>
-    <p style="color: #666; font-size: 14px; margin-top: 10px;">Mengalihkan langsung ke promo di aplikasi McDonald's.</p>
-    
-    <a href="https://smart.link/2e5d9984m04hg?offerId=272489&loyaltyId=5271" class="btn-mcd" id="gasBtn">KLAIM VOUCHER</a>
-</div>
-
-<script>
-    // Ambil ID dari URL jika ada
-    const urlParams = new URLSearchParams(window.location.search);
-    const offerId = urlParams.get('id') || '272489';
-    const btn = document.getElementById('gasBtn');
-    
-    // Set link final
-    const finalLink = "https://smart.link/2e5d9984m04hg?offerId=" + offerId + "&loyaltyId=5271";
-    btn.href = finalLink;
-
-    // Tambahkan event listener untuk menangani error Safari
-    btn.addEventListener('click', function(e) {
-        // Jika dalam 500ms tidak pindah aplikasi, coba cara alternatif
-        setTimeout(function() {
-            window.location.href = "https://u.mcd.com/app/offer-details?offerId=" + offerId;
-        }, 500);
-    });
-</script>
-
+<body style="background:#FFBC0D; font-family:-apple-system, sans-serif; text-align:center; padding-top:100px; margin:0;">
+    <div style="background:white; padding:40px 20px; border-radius:30px; display:inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width:85%; max-width:320px;">
+        <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
+        <h2 style="margin-top:20px; color:#333;">VOUCHER READY</h2>
+        <p style="color:#666; font-size:14px;">Klik tombol di bawah untuk klaim.</p>
+        
+        <a href="https://u.mcd.com/app/offer-details?offerId=272489" 
+           style="background:#DB3434; color:white; padding:20px; text-decoration:none; border-radius:15px; font-weight:bold; display:block; margin-top:20px; font-size:18px;">
+           BUKA DI APLIKASI
+        </a>
+        
+        <p style="font-size:10px; color:#999; margin-top:25px;">Versi Clean - No License</p>
+    </div>
 </body>
 </html>
