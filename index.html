@@ -1,41 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Injector</title>
+    <title>McD Promo Injector</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
-        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .btn { display: block; padding: 18px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; margin-top: 20px; }
+        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
+        .card { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; width: 85%; max-width: 320px; }
+        .btn-mcd { display: block; padding: 20px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 25px; box-shadow: 0 5px 15px rgba(219,52,52,0.4); }
+        .btn-mcd:active { transform: scale(0.95); background: #b52a2a; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-        <h2>INJECTOR PROMO</h2>
-        <p id="info">Menghubungkan ke Aplikasi...</p>
-        <a href="#" id="btn-link" class="btn">BUKA APLIKASI</a>
-    </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+<div class="card">
+    <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80" alt="McD">
+    <h2 style="margin: 15px 0 5px; color: #333;">Klaim Promo</h2>
+    <p id="promo-id" style="color: #666; font-size: 14px; margin: 0;">Menunggu ID Promo...</p>
+    
+    <a href="#" id="claim-link" class="btn-mcd">BUKA DI APLIKASI</a>
+    
+    <p style="font-size: 11px; color: #aaa; margin-top: 20px;">Klik tombol di atas untuk membuka aplikasi McDonald's</p>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    
+    if (id) {
+        document.getElementById('promo-id').innerText = "Offer ID: " + id;
         
-        if (id) {
-            document.getElementById('info').innerText = "Offer ID: " + id;
-            
-            // GUNAKAN UNIVERSAL LINK (HTTPS) BUKAN SCHEME (mcdonalds://)
-            // Ini agar Safari tidak mengeluarkan pesan "Alamat Tidak Sah"
-            const universalLink = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=5271`;
-            
-            document.getElementById('btn-link').href = universalLink;
+        // GUNAKAN LINK HTTPS RESMI (Universal Link)
+        // Ini adalah link yang sama dengan yang digunakan bot-bot sukses
+        const finalUrl = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=5271`;
+        
+        const btn = document.getElementById('claim-link');
+        btn.href = finalUrl;
+        
+        // KITA HAPUS WINDOW.LOCATION.HREF OTOMATIS
+        // Biarkan user yang klik tombolnya agar Safari tidak error
+    } else {
+        document.getElementById('promo-id').innerText = "ID Promo tidak ditemukan";
+    }
+</script>
 
-            // Coba buka otomatis
-            setTimeout(() => {
-                window.location.href = universalLink;
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
