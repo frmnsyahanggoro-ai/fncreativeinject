@@ -3,88 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer"> <title>Promo Eksklusif McDonald's</title>
+    <meta name="referrer" content="no-referrer">
+    <title>Pilih Promo McDonald's</title>
     <style>
-        :root { --mcd-red: #da291c; --mcd-yellow: #ffbc0d; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
-        header { text-align: center; padding: 20px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eee; transition: 0.3s; }
-        .card-body { padding: 20px; text-align: center; }
-        h3 { margin: 10px 0; font-size: 1.1rem; color: #333; min-height: 50px; display: flex; align-items: center; justify-content: center; }
-        .price { color: var(--mcd-red); font-weight: bold; font-size: 1.4rem; margin-bottom: 20px; }
-        .btn-claim { 
-            display: inline-block; width: 100%; background: var(--mcd-yellow); color: #222; 
-            text-decoration: none; padding: 12px 0; border-radius: 8px; font-weight: bold; 
-            cursor: pointer; border: none; font-size: 1rem;
-        }
-        .btn-claim:active { transform: scale(0.98); }
-        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 999; flex-direction: column; align-items: center; justify-content: center; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--mcd-red); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body { font-family: sans-serif; background: #f0f0f0; padding: 20px; text-align: center; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        .btn { background: #ffbc0d; color: #222; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
+        h3 { margin-top: 0; font-size: 18px; color: #da291c; }
+        p { margin: 5px 0 15px; color: #666; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<div id="loader" class="loading-overlay">
-    <div class="spinner"></div>
-    <p>Sedang Menginjeksi Promo...</p>
-</div>
+    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50" style="margin-bottom: 20px;">
+    
+    <div id="catalog"></div>
 
-<header>
-    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50">
-    <h1>Klaim Reward Rp 400</h1>
-</header>
+    <div id="bridge-container" style="display:none;"></div>
 
-<div class="grid" id="katalog"></div>
+    <script>
+        const promos = [
+            { name: "Panas 1", off: "267611", loy: "5272" },
+            { name: "1 Cheeseburger + 1 Small FF", off: "272395", loy: "5271" },
+            { name: "1 Ayam + 1 McFloat + 1 FF", off: "272400", loy: "5271" },
+            { name: "1 McFlurry + 1 FF", off: "272404", loy: "5271" },
+            { name: "4 Pcs McNugget + 1 Cola", off: "272469", loy: "5271" },
+            { name: "1 Ayam + 1 Nasi + 1 Tea", off: "272484", loy: "5271" }
+        ];
 
-<script>
-    const promoData = [
-        { name: "Panas 1", offer: "267611", loyalty: "5272" },
-        { name: "1 Cheesburger + 1 Small FF", offer: "272395", loyalty: "5271" },
-        { name: "1 Ayam + 1 McFloat + 1 FF", offer: "272400", loyalty: "5271" },
-        { name: "1 McFlurry + 1 FF", offer: "272404", loyalty: "5271" },
-        { name: "4 Pcs McNugget + 1 Cola", offer: "272469", loyalty: "5271" },
-        { name: "1 Ayam + 1 Nasi + 1 Tea", offer: "272484", loyalty: "5271" }
-    ];
+        const catalog = document.getElementById('catalog');
 
-    const container = document.getElementById('katalog');
-
-    promoData.forEach(item => {
-        container.innerHTML += `
-            <div class="card">
-                <div class="card-body">
-                    <h3>${item.name}</h3>
-                    <div class="price">Rp 400</div>
-                    <button class="btn-claim" onclick="processClaim('${item.offer}', '${item.loyalty}')">AMBIL SEKARANG</button>
+        promos.forEach(p => {
+            catalog.innerHTML += `
+                <div class="card">
+                    <h3>${p.name}</h3>
+                    <p>Harga Spesial: Rp 400</p>
+                    <button class="btn" onclick="executeClaim('${p.off}', '${p.loy}')">KLAIM SEKARANG</button>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
 
-    function processClaim(offId, loyId) {
-        document.getElementById('loader').style.display = 'flex';
-
-        // 1. Link Dasar (Slug yang sering digunakan Mukidi)
-        const baseSlug = "2e5d9984m04hg"; 
-        
-        // 2. Teknik Bypass Kochava: Memasukkan parameter ke dalam smart.link secara eksplisit
-        // Kita gunakan format gmalite-smartweb agar aplikasi langsung memproses internal browsernya
-        const finalUrl = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(
-            `https://smart.link/${baseSlug}?offer_id=${offId}&loyalty_id=${loyId}&source=direct`
-        )}`;
-
-        // 3. Eksekusi dengan Delay agar terlihat natural bagi sistem keamanan
-        setTimeout(() => {
-            window.location.replace(finalUrl);
+        function executeClaim(offId, loyId) {
+            // SLUG PENGGANTI: Gunakan slug baru jika slug lama (2e5d9984m04hg) sudah mati
+            const slug = "2e5d9984m04hg"; 
             
-            // Sembunyikan loader setelah beberapa detik jika aplikasi tidak terbuka
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-            }, 3000);
-        }, 1500);
-    }
-</script>
+            // CONSTRUCT LINK: Memasukkan parameter ke dalam link smartlink
+            const finalLink = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&af_adset=custom&af_ad=manual`;
 
+            // DEEP LINK SCHEME
+            const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalLink)}`;
+
+            // TEKNIK BYPASS KOCHAVA: Menggunakan window.open dengan referer dibuang
+            const newWindow = window.open('', '_blank');
+            newWindow.opener = null; // Menghilangkan jejak pengirim (Referrer)
+            newWindow.location.href = deepLink;
+
+            // Jika window.open gagal (terhalang popup blocker), gunakan fallback:
+            setTimeout(() => {
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.replace(deepLink);
+                }
+            }, 500);
+        }
+    </script>
 </body>
 </html>
