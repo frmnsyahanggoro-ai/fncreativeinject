@@ -3,74 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FN GHOST INJECTOR</title>
+    <title>FN LAUNCHER</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #fff; padding: 20px; text-align: center; }
-        .box { border: 2px solid #da291c; border-radius: 15px; padding: 20px; margin-top: 10px; }
-        h2 { color: #da291c; margin: 0; font-weight: 900; }
-        p { font-size: 11px; color: #999; margin-bottom: 20px; }
+        body { font-family: -apple-system, sans-serif; background: #f2f2f2; padding: 20px; text-align: center; }
+        .logo { color: #da291c; font-weight: 900; font-size: 24px; margin-bottom: 5px; }
+        .sub { font-size: 12px; color: #666; margin-bottom: 25px; }
         
-        /* Tombol Eksekusi */
-        .btn { 
-            display: block; width: 100%; padding: 15px 0; margin: 10px 0;
-            background: #ffbc0d; color: #000; font-weight: 800; 
-            border: none; border-radius: 50px; font-size: 14px;
-            box-shadow: 0 4px 0 #d49c0a; cursor: pointer;
+        .card { 
+            background: white; border-radius: 12px; padding: 15px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 15px; 
         }
-        .btn:active { transform: translateY(4px); box-shadow: none; background: #e0a800; }
         
-        #status { font-weight: bold; margin-top: 10px; font-size: 12px; height: 20px; color: green;}
+        .btn { 
+            display: block; width: 100%; padding: 12px 0; 
+            background: #ffbc0d; color: #000; font-weight: bold; 
+            text-decoration: none; border-radius: 8px; font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        h3 { margin: 0; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h2>FN CREATIVE</h2>
-        <p>METODE: GHOST IFRAME (IOS BYPASS)</p>
+    <div class="logo">FN CREATIVE</div>
+    <div class="sub">SAFARI LAUNCHER MODE</div>
 
-        <button class="btn" onclick="hantu('267611', '5272')">🔥 CLAIM PANAS 1</button>
-
-        <button class="btn" onclick="hantu('272395', '5271')">🍔 CLAIM BURGER</button>
-
-        <button class="btn" onclick="hantu('272469', '5271')">🍟 CLAIM NUGGET</button>
-        
-        <button class="btn" onclick="hantu('272400', '5271')">🥤 CLAIM MCFLOAT</button>
-
-         <button class="btn" onclick="hantu('272404', '5271')">🍦 CLAIM MCFLURRY</button>
-
-         <button class="btn" onclick="hantu('272484', '5271')">🍚 CLAIM AYAM NASI</button>
-
-        <div id="status"></div>
+    <div class="card">
+        <h3>🔥 Paket Panas 1</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=267611&loyalty_id=5272&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
     </div>
 
-    <script>
-        function hantu(offerId, loyaltyId) {
-            // Tampilkan status biar kelihatan ada proses
-            document.getElementById('status').innerText = "Menyuntikkan ID: " + offerId + "...";
+    <div class="card">
+        <h3>🍔 Cheeseburger + Fries</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=272395&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
+    </div>
 
-            // RAKIT URL LENGKAP
-            var targetUrl = "gmalite://offers/details?offer_id=" + offerId + "&loyalty_id=" + loyaltyId + "&view=claim&action=redeem&is_native=true&is_mass_code=1";
+    <div class="card">
+        <h3>🍟 McNugget + Cola</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=272469&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
+    </div>
+    
+     <div class="card">
+        <h3>🥤 Paket McFloat</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=272400&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
+    </div>
 
-            // TEKNIK HANTU (IFRAME INJECTION)
-            // Kita bikin elemen iframe sembunyi-sembunyi
-            var iframe = document.createElement("iframe");
-            iframe.style.border = "none";
-            iframe.style.width = "1px";
-            iframe.style.height = "1px";
-            iframe.style.display = "none";
-            
-            // Masukkan link voucher ke dalam iframe
-            iframe.src = targetUrl;
-            
-            // Tempel ke body (Ini yang memicu iOS untuk membuka link)
-            document.body.appendChild(iframe);
+     <div class="card">
+        <h3>🍦 Paket McFlurry</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=272404&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
+    </div>
+    
+    <div class="card">
+        <h3>🍚 Ayam Nasi Lemon Tea</h3>
+        <a class="btn" href="gmalite://offers/details?offer_id=272484&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1">BUKA DI APLIKASI</a>
+    </div>
 
-            // Bersihkan jejak setelah 2 detik
-            setTimeout(function() {
-                document.body.removeChild(iframe);
-                document.getElementById('status').innerText = "Selesai. Cek Voucher.";
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
