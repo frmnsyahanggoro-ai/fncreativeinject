@@ -1,42 +1,69 @@
-function claimVoucher(offId, loyId, massCode) {
-    // Slug yang Anda miliki
-    const slug = "2le1hb5pjyoo9"; 
-    const partner = "Tiktok Live 109.5";
-    
-    // 1. Metadata tambahan agar iOS tidak menganggap ini 'bot click'
-    const ts = Math.floor(Date.now() / 1000);
-    
-    // 2. Susun URL Smartlink (Gunakan af_dp sebagai backup deep link di iOS)
-    const baseUrl = `https://smart.link/${slug}`;
-    const queryParams = `?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1&ts=${ts}`;
-    
-    const finalTarget = baseUrl + queryParams;
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Promo McDonald's</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f7f7f7; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 80%; max-width: 350px; }
+        .btn { background: #da291c; color: white; border: none; padding: 15px 25px; border-radius: 10px; font-weight: bold; font-size: 16px; width: 100%; cursor: pointer; text-decoration: none; display: inline-block; }
+        h2 { margin-bottom: 5px; color: #333; }
+        p { color: #666; margin-bottom: 25px; font-size: 14px; }
+    </style>
+</head>
+<body>
 
-    // 3. DI iOS: Protokol gmalite:// harus sangat bersih
-    // Kita coba gunakan skema gmalite-smartweb dengan format yang lebih sederhana
-    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
+    <div class="card">
+        <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50" style="margin-bottom:15px;">
+        <h2>Klaim Promo</h2>
+        <p>Ketuk tombol di bawah untuk membuka aplikasi McDonald's</p>
+        
+        <button class="btn" onclick="startInjection()">AMBIL PROMO SEKARANG</button>
+    </div>
 
-    // 4. KHUSUS iOS: Gunakan simulasi klik fisik (Location Replace sering memicu Error 500 di iOS)
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    <script>
+        function startInjection() {
+            // Data dari hasil sniffing Anda
+            const offId = "272469";
+            const loyId = "5271";
+            const massCode = "PaketNgemil12"; // Ganti jika Anda punya kode baru dari HTTP Toolkit
+            const partner = "Tiktok Live 109.5";
+            
+            // Format Direct bypass (Tanpa Smartlink rewel)
+            const finalTarget = `https://www.mcdonalds.co.id/promo/detail?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1`;
+            
+            // Deep link utama
+            const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
 
-    if (isIOS) {
-        // iOS butuh interaksi yang lebih 'halus'
-        // Kita gunakan link transparan yang diklik otomatis
-        const a = document.createElement('a');
-        a.href = deepLink;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-    } else {
-        // Android tetap gunakan Intent atau Location
-        window.location.href = deepLink;
-    }
+            // Deteksi Perangkat
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const isAndroid = /Android/i.test(navigator.userAgent);
 
-    // Jika dalam 2 detik masih di browser, berarti link gagal/error
-    setTimeout(function() {
-        if (!document.hidden) {
-            // Jika gagal, jangan lempar ke App Store, tapi lempar ke web McD resmi
-            window.location.replace("https://www.mcdonalds.co.id/promo");
+            if (isIOS) {
+                // Trik iOS: Menggunakan Anchor Click simulasi agar tidak Error 500
+                const a = document.createElement('a');
+                a.href = deepLink;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else if (isAndroid) {
+                // Trik Android: Menggunakan Intent
+                const intentLink = `intent://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}#Intent;scheme=gmalite;package=com.mcdonalds.mobileapp;S.browser_fallback_url=${encodeURIComponent(finalTarget)};end`;
+                window.location.href = intentLink;
+            } else {
+                // Fallback untuk browser lain
+                window.location.href = deepLink;
+            }
+
+            // Mencegah about:blank atau stuck
+            setTimeout(() => {
+                if (!document.hidden) {
+                    console.log("Membuka fallback...");
+                }
+            }, 2500);
         }
-    }, 2000);
-}
+    </script>
+</body>
+</html>
