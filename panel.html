@@ -1,21 +1,49 @@
-<script>
-function gas() {
-    var o = "272484"; // ID Ayam Nasi
-    var l = "5271";
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukidi Engine V4</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #da291c; color: white; text-align: center; padding: 20px; }
+        .card { background: white; border-radius: 20px; padding: 25px; color: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .btn { background: #ffbc0d; color: #222; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; margin-bottom: 15px; cursor: pointer; }
+        .btn-red { background: #da291c; color: white; }
+    </style>
+</head>
+<body>
 
-    // KUNCI TERAKHIR: Gunakan 'onelink.me' sebagai tameng
-    // Ini adalah domain resmi yang digunakan McD untuk iklan di Instagram/Facebook
-    var officialBridge = "https://gmalite.onelink.me/vX8W/mukidi?offer_id=" + o + "&loyalty_id=" + l;
+    <div class="card">
+        <h3 style="margin-top:0;">INJECTOR STAGE 2</h3>
+        
+        <button class="btn" onclick="pancing()">1. BANGUNKAN APLIKASI</button>
+        
+        <button class="btn btn-red" onclick="tembak()">2. INJECT VOUCHER</button>
+        
+        <p style="font-size: 11px; color: #666;">Klik tombol 1, lalu kembali ke sini dan klik tombol 2.</p>
+    </div>
 
-    // Tembak menggunakan perintah 'smartweb' ke onelink
-    var finalCmd = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(officialBridge);
+    <script>
+        function pancing() {
+            // Membuka halaman Rewards resmi untuk memancing Token Session
+            window.location.href = "gmalite://rewards";
+        }
 
-    // Kirim perintah
-    window.location.href = finalCmd;
+        function tembak() {
+            var off = "272469"; // ID McNugget (ID EMAS KAMU)
+            var loy = "5271";
+            var partner = encodeURIComponent("Tiktok Live 109.4");
 
-    // Paksa respon dengan jalur native (jeda 1 detik)
-    setTimeout(function() {
-        window.location.href = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l + "&view=claim";
-    }, 1000);
-}
-</script>
+            // Gunakan skema "Action Force"
+            var target = "gmalite://offers/details?offer_id=" + off + 
+                         "&loyalty_id=" + loy + 
+                         "&view=claim" + 
+                         "&action=redeem" + 
+                         "&is_native=true" + 
+                         "&partner=" + partner;
+
+            window.location.href = target;
+        }
+    </script>
+</body>
+</html>
