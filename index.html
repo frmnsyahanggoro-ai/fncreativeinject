@@ -1,30 +1,18 @@
-function claimVoucher(offId, loyId, massCode) {
+function handleClaim(event, offId, loyId) {
+    event.preventDefault();
+
+    // 1. GUNAKAN KODE TERBARU DARI HTTP TOOLKIT (Jangan pakai yang Desember 14)
+    const freshCode = "KODE_YANG_ANDA_TEMUKAN_HARI_INI"; 
     const slug = "2le1hb5pjyoo9"; 
-    const partner = "Tiktok Live 109.5";
 
-    // Susun URL Smartlink
-    const finalTarget = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1`;
+    // 2. Tambahkan Timestamp agar dianggap permintaan baru
+    const ts = Math.floor(Date.now() / 1000);
+
+    const targetUrl = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${freshCode}&is_mass_code=1&ts=${ts}`;
     
-    // Ini adalah link Deep Link aslinya
-    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
+    // 3. Gunakan Format Direct Webview (Lebih stabil dari Smartweb)
+    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(targetUrl)}`;
 
-    // STRATEGI BYPASS ANDROID (Intent)
-    // Jika user pakai Android, kita gunakan format Intent agar sistem Android yang mencarikan aplikasinya
-    const intentLink = `intent://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}#Intent;scheme=gmalite;package=com.mcdonalds.mobileapp;S.browser_fallback_url=${encodeURIComponent(finalTarget)};end`;
-
-    // Cek Perangkat
-    const isAndroid = /Android/i.test(navigator.userAgent);
-
-    if (isAndroid) {
-        // Gunakan Intent untuk Android agar tidak about:blank
-        window.location.href = intentLink;
-    } else {
-        // Untuk iPhone atau browser lain, gunakan cara standar
-        window.location.href = deepLink;
-    }
-
-    // Jika tetap diam di halaman, ini cadangan terakhir (Force Redirect)
-    setTimeout(function() {
-        window.location.replace(deepLink);
-    }, 500);
+    // 4. Eksekusi
+    window.location.href = deepLink;
 }
