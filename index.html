@@ -3,58 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>McD Inject Panel</title>
+    <title>McD Admin Panel</title>
     <style>
         body { font-family: -apple-system, sans-serif; background: #da291c; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .box { background: white; padding: 30px; border-radius: 30px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
         .logo { width: 50px; margin-bottom: 10px; }
         h2 { margin: 0 0 5px 0; color: #333; font-size: 18px; }
         p { font-size: 11px; color: #999; margin-bottom: 20px; }
-        input { width: 100%; padding: 15px; margin-bottom: 12px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; background: #fafafa; transition: 0.3s; }
-        input:focus { border-color: #ffbc0d; background: #fff; }
-        .btn { background: #ffbc0d; color: #222; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 188, 13, 0.4); }
+        input { width: 100%; padding: 15px; margin-bottom: 12px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; background: #fafafa; }
+        input:focus { border-color: #ffbc0d; }
+        .btn { background: #ffbc0d; color: #222; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="box">
         <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" class="logo">
-        <h2>Panel Injector</h2>
-        <p>Masukkan ID manual untuk tembak ke App.</p>
+        <h2>Manual Injector</h2>
+        <p>Masukkan ID untuk memicu klaim otomatis.</p>
 
-        <input type="number" id="o" placeholder="Offer ID (27xxxx)" inputmode="numeric">
-        <input type="number" id="l" placeholder="Loyalty ID (5xxx)" inputmode="numeric">
+        <input type="number" id="offId" placeholder="Offer ID (27xxxx)" inputmode="numeric">
+        <input type="number" id="loyId" placeholder="Loyalty ID (5xxx)" inputmode="numeric">
 
-        <button class="btn" onclick="tembak()">START INJECTION</button>
+        <button class="btn" onclick="startAction()">INJECT & REDEEM</button>
     </div>
 
     <script>
-        function tembak() {
-            var off = document.getElementById('o').value;
-            var loy = document.getElementById('l').value;
+        function startAction() {
+            var o = document.getElementById('offId').value;
+            var l = document.getElementById('loyId').value;
 
-            if (off == "" || loy == "") { alert("Isi ID dulu bos!"); return; }
+            if (o == "" || l == "") { alert("Isi ID dulu!"); return; }
 
-            // STRATEGI BYPASS:
-            // Kita gunakan domain mcdonalds.co.id tapi diarahkan ke modul redeem internal.
-            // Ini untuk menghindari 404 karena gmalite-smartweb akan menganggap ini link internal.
-            var rawUrl = "https://www.mcdonalds.co.id/promo/details/" + off + 
-                         "?loyalty_id=" + loy + 
-                         "&view=claim&is_mass_code=1&action=redeem";
+            // PARAMETER RAHASIA: 
+            // Kita gunakan skema 'offers/redeem' agar aplikasi langsung memunculkan tombol KONFIRMASI
+            // 'is_mass_code=1' dan 'view=claim' wajib ada agar tidak putih
+            var nativeAction = "gmalite://offers/redeem?offer_id=" + o + 
+                               "&loyalty_id=" + l + 
+                               "&is_mass_code=1" +
+                               "&view=claim" +
+                               "&action=redeem" +
+                               "&force_open=1";
 
-            // Bungkus dengan Protokol Smartweb
-            var bridge = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(rawUrl);
+            // Jalur Cadangan: Webview internal yang dipaksa ke halaman Detail
+            var webTarget = "https://www.mcdonalds.co.id/offers/details/" + o + "?loyalty_id=" + l + "&view=claim";
+            var webAction = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(webTarget);
 
-            // EKSEKUSI 1: Buka Protokol Utama
-            window.location.href = bridge;
+            // EKSEKUSI: Tembak Jalur Native Terlebih Dahulu (Agar langsung muncul menu)
+            window.location.href = nativeAction;
 
-            // EKSEKUSI 2: Jika dalam 0.8 detik gagal, tembak via modul Native Loyalty (Anti 500)
+            // Fallback: Jika dalam 1 detik aplikasi tidak merespon modul native, paksa via WebAction
             setTimeout(function() {
                 if (!document.hidden) {
-                    var nativePath = "gmalite://loyalty/details?offer_id=" + off + "&loyalty_id=" + loy;
-                    window.location.href = nativePath;
+                    window.location.href = webAction;
                 }
-            }, 800);
+            }, 1000);
         }
     </script>
 
