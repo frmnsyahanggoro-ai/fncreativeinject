@@ -4,48 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Klaim Reward</title>
+    <title>Katalog Promo McD</title>
     <style>
-        body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f4f4f4; }
-        .card { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.1); width: 80%; }
-        .btn { background: #da291c; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; }
+        body { font-family: -apple-system, sans-serif; background: #f9f9f9; padding: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eee; }
+        .title { font-size: 14px; font-weight: bold; height: 40px; overflow: hidden; margin-bottom: 10px; color: #333; }
+        .btn { background: #da291c; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 13px; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50" style="margin-bottom: 15px;">
-    <h3>Reward Siap Diklaim</h3>
-    <p>Klik tombol di bawah untuk memproses penawaran.</p>
-    <button class="btn" onclick="directInject()">AMBIL SEKARANG</button>
-</div>
+<h3 style="text-align: center;">Pilih Promo Rp 400</h3>
+<div class="grid" id="menu"></div>
 
 <script>
-    function directInject() {
-        const offId = "272469";
-        const loyId = "5271";
-        const massCode = "PaketNgemil12"; // Tetap masukkan kode ini
-        const slug = "2le1hb5pjyoo9"; // Gunakan slug baru Anda
+    const dataPromo = [
+        { name: "Panas 1", off: "267611", loy: "5272" },
+        { name: "Cheeseburger + FF", off: "272395", loy: "5271" },
+        { name: "Ayam + McFloat + FF", off: "272400", loy: "5271" },
+        { name: "McFlurry + FF", off: "272404", loy: "5271" },
+        { name: "4 Pcs McNugget + Cola", off: "272469", loy: "5271" },
+        { name: "Ayam + Nasi + Tea", off: "272484", loy: "5271" }
+    ];
 
-        // RAHASIA MUKIDI: Mereka sering menggunakan format 'offers/v1' 
-        // atau langsung melempar ke smartlink di dalam gmalite tanpa domain mcdonalds.co.id
+    const container = document.getElementById('menu');
+    dataPromo.forEach(p => {
+        container.innerHTML += `
+            <div class="card">
+                <div class="title">${p.name}</div>
+                <button class="btn" onclick="gasKlaim('${p.off}', '${p.loy}')">KLAIM</button>
+            </div>
+        `;
+    });
+
+    function gasKlaim(offId, loyId) {
+        const slug = "2le1hb5pjyoo9"; 
+        const mCode = "PaketNgemil12"; // Sesuaikan dengan hasil sniffing terbaru jika masih gagal
         
-        // Coba format 1 (Direct Smartlink Injection):
-        const targetRaw = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&is_mass_code=1`;
-        
-        // Kita gunakan gmalite-smartweb tapi isinya langsung link tracking
-        const finalDeepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(targetRaw)}`;
+        // JALUR 1: Direct Native (Ini jalur paling ampuh anti 404)
+        // Jalur ini memerintahkan aplikasi membuka modul internal, bukan halaman web.
+        const nativePath = `gmalite://offers/details?offer_id=${offId}&loyalty_id=${loyId}&is_mass_code=1&code=${mCode}`;
 
-        // Eksekusi
-        window.location.href = finalDeepLink;
+        // JALUR 2: Smartweb Bypass
+        // Digunakan jika aplikasi versi lama butuh pemicu browser internal
+        const webPath = `https://www.mcdonalds.co.id/offers/details?offer_id=${offId}&loyalty_id=${loyId}&code=${mCode}&is_mass_code=1`;
+        const smartWeb = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(webPath)}`;
 
-        // Backup jika tetap 404, gunakan format Native (Tanpa weburl):
+        // EKSEKUSI (Coba Native dulu)
+        window.location.href = nativePath;
+
+        // Fallback jika jalur Native tidak merespon di iOS
         setTimeout(() => {
             if (!document.hidden) {
-                const nativeLink = `gmalite://offers/details?offer_id=${offId}&loyalty_id=${loyId}`;
-                window.location.href = nativeLink;
+                window.location.href = smartWeb;
             }
-        }, 1500);
+        }, 800);
     }
 </script>
 
