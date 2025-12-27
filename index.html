@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Promo Injector</title>
+    <title>McD Injector - fncreative</title>
     <style>
         body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
-        .card { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; width: 85%; max-width: 320px; }
+        .card { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 85%; max-width: 320px; }
         .btn-mcd { display: block; padding: 20px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 25px; box-shadow: 0 5px 15px rgba(219,52,52,0.4); }
+        .btn-mcd:active { transform: scale(0.95); background: #b52a2a; }
+        .info { font-size: 11px; color: #aaa; margin-top: 20px; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -15,9 +17,11 @@
 <div class="card">
     <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80" alt="McD">
     <h2 style="margin: 15px 0 5px; color: #333;">Klaim Promo</h2>
-    <p id="promo-id" style="color: #666; font-size: 14px;">Menghubungkan...</p>
+    <p id="promo-id" style="color: #666; font-size: 14px; margin: 0;">Menyiapkan suntikan promo...</p>
     
-    <a href="#" id="claim-link" class="btn-mcd">BUKA DI APLIKASI</a>
+    <a href="#" id="claim-link" class="btn-mcd">INJECT KE APLIKASI</a>
+    
+    <p class="info">Pastikan aplikasi McDonald's sudah terinstall.<br>Klik tombol di atas untuk membuka.</p>
 </div>
 
 <script>
@@ -25,17 +29,19 @@
     const id = params.get('id');
     
     if (id) {
-        document.getElementById('promo-id').innerText = "Offer ID: " + id;
+        document.getElementById('promo-id').innerText = "Target Offer ID: " + id;
         
-        // Link Universal (HTTPS) agar tidak muncul error "Alamat Tidak Sah"
+        // MENGGUNAKAN SMART LINK RESMI (UNIVERSAL LINK)
+        // Ini adalah kunci agar Safari tidak protes 'Alamat Tidak Sah'
         const finalUrl = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=5271`;
         
         const btn = document.getElementById('claim-link');
         btn.href = finalUrl;
         
-        // JANGAN gunakan redirect otomatis agar tidak error server/cache
+        // JANGAN GUNAKAN REDIRECT OTOMATIS
+        // Biarkan user klik sendiri agar sistem iOS memberikan izin buka aplikasi
     } else {
-        document.getElementById('promo-id').innerText = "Gunakan ID Promo di link";
+        document.getElementById('promo-id').innerText = "ID Promo tidak terdeteksi";
     }
 </script>
 
