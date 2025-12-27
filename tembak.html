@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing...</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #da291c; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p>Memproses Voucher...</p>
+    <p style="font-size:10px; color:#999">Mohon tunggu...</p>
+
+    <script>
+        // DATA VOUCHER DARI JSON KAMU
+        var target = "gmalite://offers/details?offer_id=272484&loyalty_id=5271&view=claim&action=redeem&is_native=true&is_mass_code=1&partner=Tiktok%20Live%20109.4";
+
+        // TEKNIK 1: AUTOMATIC LOCATION REPLACE (Paling Halus)
+        window.location.replace(target);
+
+        // TEKNIK 2: FALLBACK (Jaga-jaga kalau teknik 1 gagal dalam 1 detik)
+        setTimeout(function() {
+            window.location.href = target;
+        }, 1000);
+
+        // TEKNIK 3: FORCE CLICK (Jaga-jaga lagi)
+        setTimeout(function() {
+            var a = document.createElement('a');
+            a.href = target;
+            a.click();
+        }, 2000);
+    </script>
+</body>
+</html>
