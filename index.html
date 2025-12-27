@@ -3,42 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FN Injector</title>
+    <title>Redirecting...</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #FFBC0D; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 40px 20px; border-radius: 35px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .btn { background: #DB3434; color: white; text-decoration: none; padding: 18px; border-radius: 15px; font-weight: bold; font-size: 18px; display: block; border: none; width: 100%; cursor: pointer; margin-top: 25px; }
+        /* Meniru tampilan Whitelist-Bot */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 90%;
+            max-width: 350px;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ffbc0d; /* Kuning McD */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+        .btn-manual {
+            display: none; /* Sembunyi dulu, muncul jika auto gagal */
+            background-color: #db3434;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-    <h2>READY TO INJECT</h2>
-    <p style="font-size: 14px; color: #666;">Klik tombol di bawah untuk membuka promo langsung di aplikasi.</p>
+<div class="container">
+    <div class="loader" id="loader"></div>
+    <h1 id="headline">Menghubungkan...</h1>
+    <p id="subline">Mohon tunggu sebentar, sedang menyiapkan voucher.</p>
     
-    <button onclick="bukaApp()" class="btn">BUKA PROMO</button>
+    <a href="#" id="btn" class="btn-manual">BUKA MANUAL</a>
 </div>
 
 <script>
-function bukaApp() {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id') || '272489';
-    
-    // JALUR 1: Menggunakan link Universal resmi (Paling aman untuk Safari)
-    const linkUtama = "https://u.mcd.com/app/offer-details?offerId=" + id;
-    
-    // JALUR 2: Menggunakan Skema Internal (Hanya jika link utama gagal)
-    const linkCadangan = "mcdonalds://GMA/OfferDetails?offerId=" + id;
+    // 1. Ambil ID dari URL (Sama seperti Whitelist-Bot)
+    const urlParams = new URLSearchParams(window.location.search);
+    const offerId = urlParams.get('id') || '272489';
+    const btn = document.getElementById('btn');
 
-    // Eksekusi: Coba buka link utama dulu
-    window.location.href = linkUtama;
+    // 2. Link Sakti (Langsung ke Aplikasi, Bypass Lisensi)
+    // Jalur ini menggabungkan Smart Link dengan Parameter Deep Link
+    const targetUrl = "https://smart.link/2e5d9984m04hg?offerId=" + offerId + "&loyaltyId=5271";
 
-    // Jika dalam 1 detik tetap di halaman yang sama, paksa pakai skema internal
-    setTimeout(function() {
-        window.location.href = linkCadangan;
-    }, 1000);
-}
+    btn.href = targetUrl;
+
+    // 3. Logika Eksekusi (Meniru Redirect Otomatis)
+    function startRedirect() {
+        // Coba buka otomatis
+        window.location.href = targetUrl;
+
+        // Jika dalam 2 detik tidak pindah (karena Safari blokir), 
+        // ubah tampilan agar user bisa klik manual
+        setTimeout(() => {
+            document.getElementById('loader').style.display = "none";
+            document.getElementById('headline').innerText = "Hampir Siap!";
+            document.getElementById('subline').innerText = "Klik tombol di bawah jika aplikasi tidak terbuka otomatis.";
+            btn.style.display = "inline-block";
+        }, 2500);
+    }
+
+    // Jalankan saat halaman dimuat
+    window.onload = startRedirect;
 </script>
 
 </body>
