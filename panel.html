@@ -2,28 +2,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: -apple-system, sans-serif; background: #fff; padding: 20px; text-align: center; }
-        .box { border: 2px solid #da291c; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 15px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
-        .btn { background: #da291c; color: #fff; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; font-size: 16px; }
+        body { font-family: sans-serif; padding: 20px; text-align: center; background: #fff; }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
+        .btn { background: #da291c; color: #fff; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2 style="font-size: 18px; color: #333;">INTERNAL PANEL</h2>
-        <input type="number" id="o" placeholder="Offer ID" inputmode="numeric">
-        <input type="number" id="l" placeholder="Loyalty ID" inputmode="numeric">
-        <button class="btn" onclick="gas()">INJECT SEKARANG</button>
-    </div>
+    <h3>INTERNAL PANEL</h3>
+    <input type="number" id="o" placeholder="Offer ID" inputmode="numeric">
+    <input type="number" id="l" placeholder="Loyalty ID" inputmode="numeric">
+    <button class="btn" onclick="gas()">INJECT</button>
+
     <script>
         function gas() {
-            var off = document.getElementById('o').value;
-            var loy = document.getElementById('l').value;
-            if(!off || !loy) return alert("Isi ID!");
-            // Perintah pindah ke voucher (Saat posisi sudah di dalam App)
-            window.location.href = "gmalite://offers/details?offer_id=" + off + "&loyalty_id=" + loy + "&view=claim&is_mass_code=1";
+            var o = document.getElementById('o').value;
+            var l = document.getElementById('l').value;
+            // Jalur Bypass langsung ke modul voucher
+            window.location.href = "gmalite://offers/details?offer_id="+o+"&loyalty_id="+l+"&view=claim&is_mass_code=1";
         }
     </script>
 </body>
