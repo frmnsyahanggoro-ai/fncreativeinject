@@ -1,18 +1,34 @@
-function handleClaim(event, offId, loyId) {
-    event.preventDefault();
-
-    // 1. GUNAKAN KODE TERBARU DARI HTTP TOOLKIT (Jangan pakai yang Desember 14)
-    const freshCode = "KODE_YANG_ANDA_TEMUKAN_HARI_INI"; 
+function claimVoucher(offId, loyId, massCode) {
     const slug = "2le1hb5pjyoo9"; 
-
-    // 2. Tambahkan Timestamp agar dianggap permintaan baru
-    const ts = Math.floor(Date.now() / 1000);
-
-    const targetUrl = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${freshCode}&is_mass_code=1&ts=${ts}`;
+    const partner = "Tiktok Live 109.5";
     
-    // 3. Gunakan Format Direct Webview (Lebih stabil dari Smartweb)
-    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(targetUrl)}`;
+    // 1. Tambahkan parameter sidik jari (fingerprint) agar tidak dianggap bot
+    const ts = Math.floor(Date.now() / 1000); // Timestamp saat ini
+    const clickId = Math.random().toString(36).substring(2, 15); // ID unik acak
 
-    // 4. Eksekusi
-    window.location.href = deepLink;
+    // 2. Susun URL Smartlink dengan parameter yang lebih lengkap (meniru aplikasi asli)
+    // Parameter 'source', 'click_id', dan 'ts' sangat penting untuk menghindari Error 500
+    const finalTarget = `https://smart.link/${slug}?offer_id=${offId}&loyalty_id=${loyId}&code=${massCode}&partner=${encodeURIComponent(partner)}&is_mass_code=1&source=tiktok&click_id=${clickId}&ts=${ts}`;
+    
+    // 3. Gabungkan ke Deep Link
+    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
+
+    // 4. STRATEGI BYPASS ANDROID (Intent)
+    const intentLink = `intent://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}#Intent;scheme=gmalite;package=com.mcdonalds.mobileapp;S.browser_fallback_url=${encodeURIComponent(finalTarget)};end`;
+
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    // EKSEKUSI
+    if (isAndroid) {
+        window.location.href = intentLink;
+    } else {
+        window.location.href = deepLink;
+    }
+
+    // Cadangan jika tidak merespon
+    setTimeout(function() {
+        if (!document.hidden) {
+            window.location.replace(deepLink);
+        }
+    }, 1000);
 }
