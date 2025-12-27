@@ -3,36 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FN INJECTOR PRO</title>
+    <title>FN INJECTOR</title>
 </head>
-<body style="background:#FFBC0D; font-family:-apple-system, sans-serif; text-align:center; padding:50px 20px;">
+<body style="background:#FFBC0D; font-family:sans-serif; text-align:center; padding:50px 20px;">
     <div style="background:white; padding:40px 20px; border-radius:30px; display:inline-block; box-shadow: 0 15px 35px rgba(0,0,0,0.2); max-width:300px;">
         <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-        <h2 style="margin-top:20px; color:#333;">PROMO INJECTOR</h2>
-        <p id="txt" style="color:#666;">Menghubungkan ke Aplikasi...</p>
+        <h2 style="margin-top:20px; color:#333;">INJECTOR REAL</h2>
+        <p id="txt" style="color:#666;">Menghubungkan...</p>
         
-        <a href="#" id="gas" style="background:#DB3434; color:white; padding:18px 30px; text-decoration:none; border-radius:15px; font-weight:bold; display:block; margin-top:25px; font-size:18px;">INJECT SEKARANG</a>
+        <a href="#" id="gas" style="background:#DB3434; color:white; padding:18px 30px; text-decoration:none; border-radius:15px; font-weight:bold; display:block; margin-top:25px; font-size:18px;">BUKA PROMO</a>
         
-        <p style="font-size:10px; color:#aaa; margin-top:20px;">fncreativeinject - No License Needed</p>
+        <p style="font-size:10px; color:#aaa; margin-top:20px;">Versi Bersih - Tanpa Mukidi</p>
     </div>
 
     <script>
         const p = new URLSearchParams(window.location.search);
         const id = p.get('id') || '272489';
-        document.getElementById('txt').innerText = "Target Promo: " + id;
+        document.getElementById('txt').innerText = "ID Promo: " + id;
         
-        // METODE HYBRID: Menggunakan Smart Link Resmi McD Indonesia
-        // Ini adalah link yang otomatis mendeteksi apakah harus buka aplikasi atau web
-        const smartLink = "https://smart.link/2e5d9984m04hg";
-        const finalUrl = `${smartLink}?offerId=${id}&loyaltyId=5271`;
+        // JALUR RESMI MCDONALDS INDONESIA (GMA LITE)
+        // Kita tidak pakai smart.link lagi karena itu punya Mukidi
+        const finalUrl = "mcdonalds://GMA/OfferDetails?offerId=" + id + "&loyaltyId=5271";
         
         const btn = document.getElementById('gas');
         btn.href = finalUrl;
 
-        // Klik otomatis setelah 1.5 detik sebagai pemicu cadangan
+        // Klik otomatis setelah 1 detik
         setTimeout(() => {
             window.location.href = finalUrl;
-        }, 1500);
+        }, 1000);
     </script>
 </body>
 </html>
