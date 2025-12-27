@@ -1,64 +1,27 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>Sistem Injeksi Promo</title>
-    <style>
-        body { font-family: sans-serif; background: #eee; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .btn-list { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 10px; }
-        .promo-btn { 
-            background: #da291c; color: white; border: none; padding: 15px; 
-            border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px;
+function claimVoucher(offId, loyId, massCode) {
+    const slug = "2le1hb5pjyoo9"; 
+    const partner = "Tiktok Live 109.5";
+
+    const queryParams = new URLSearchParams({
+        offer_id: offId,
+        loyalty_id: loyId,
+        code: massCode,
+        partner: partner,
+        is_mass_code: "1"
+    }).toString();
+
+    const finalTarget = `https://smart.link/${slug}?${queryParams}`;
+    const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
+
+    // PERBAIKAN: Jangan pakai window.location.replace secara otomatis
+    // Gunakan lokasi langsung pada window utama saat ini
+    window.top.location.href = deepLink;
+
+    // Fallback: Jika setelah 3 detik masih di browser, berarti aplikasi tidak terbuka
+    setTimeout(function() {
+        if (!document.hidden) {
+            // Arahkan ke Play Store atau Web resmi agar tidak 'about:blank'
+            window.location.href = "https://www.mcdonalds.co.id/promo";
         }
-        .promo-btn:active { background: #b11f15; }
-        .info { font-size: 12px; color: #666; margin-top: 20px; text-align: center; }
-    </style>
-</head>
-<body>
-
-    <h2>Klaim Promo Aktif</h2>
-    
-    <div class="btn-list">
-        <button class="promo-btn" onclick="claimVoucher('267611', '5272', 'PaketPanas1')">Klaim Panas 1</button>
-        <button class="promo-btn" onclick="claimVoucher('272395', '5271', 'PaketNgemil01')">Klaim Cheeseburger + FF</button>
-        <button class="promo-btn" onclick="claimVoucher('272469', '5271', 'PaketNgemil12')">Klaim McNugget + Cola</button>
-        <button class="promo-btn" onclick="claimVoucher('272484', '5271', 'PaketNasi05')">Klaim Ayam + Nasi</button>
-    </div>
-
-    <div class="info">
-        *Menggunakan Parameter Tiktok Live 109.5<br>
-        Deep Link bypass Aktif
-    </div>
-
-    <script>
-        function claimVoucher(offId, loyId, massCode) {
-            // Slug yang Anda temukan tadi
-            const slug = "2le1hb5pjyoo9"; 
-            
-            // Partner sesuai hasil HTTP Toolkit Anda
-            const partner = "Tiktok Live 109.5";
-
-            // Susun parameter secara lengkap agar Kochava tidak memblokir
-            const queryParams = new URLSearchParams({
-                offer_id: offId,
-                loyalty_id: loyId,
-                code: massCode,
-                partner: partner,
-                is_mass_code: "1",
-                source: "tiktok",
-                click_id: Math.random().toString(36).substring(2, 15) // Generate ID acak agar dianggap unik
-            }).toString();
-
-            // Format Deep Link untuk Injeksi Browser Internal Aplikasi
-            const finalURL = `https://smart.link/${slug}?${queryParams}`;
-            const deepLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalURL)}`;
-
-            // Eksekusi
-            console.log("Injeksi URL: " + finalURL);
-            window.location.replace(deepLink);
-        }
-    </script>
-</body>
-</html>
+    }, 3000);
+}
