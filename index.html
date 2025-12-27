@@ -3,72 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo Eksklusif McDonald's</title>
+    <meta name="referrer" content="no-referrer"> <title>Promo Eksklusif McDonald's</title>
     <style>
         :root { --mcd-red: #da291c; --mcd-yellow: #ffbc0d; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
         header { text-align: center; padding: 20px 0; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 1px solid #ddd; }
-        .card:hover { transform: translateY(-5px); }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eee; transition: 0.3s; }
         .card-body { padding: 20px; text-align: center; }
-        h3 { margin: 10px 0; font-size: 1.2rem; height: 3rem; display: flex; align-items: center; justify-content: center; }
-        .price-tag { color: var(--mcd-red); font-weight: bold; font-size: 1.3rem; margin-bottom: 15px; }
+        h3 { margin: 10px 0; font-size: 1.1rem; color: #333; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        .price { color: var(--mcd-red); font-weight: bold; font-size: 1.4rem; margin-bottom: 20px; }
         .btn-claim { 
-            display: block; background: var(--mcd-yellow); color: #222; text-decoration: none; 
-            padding: 12px; border-radius: 8px; font-weight: bold; transition: 0.2s;
+            display: inline-block; width: 100%; background: var(--mcd-yellow); color: #222; 
+            text-decoration: none; padding: 12px 0; border-radius: 8px; font-weight: bold; 
+            cursor: pointer; border: none; font-size: 1rem;
         }
-        .btn-claim:hover { background: #eab10c; }
-        .footer-note { text-align: center; font-size: 0.8rem; color: #888; margin-top: 40px; }
+        .btn-claim:active { transform: scale(0.98); }
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 999; flex-direction: column; align-items: center; justify-content: center; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--mcd-red); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<header>
-    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" alt="McD Logo" width="60">
-    <h1>Pilih Promo Anda</h1>
-    <p>Klik tombol di bawah untuk langsung klaim di aplikasi</p>
-</header>
-
-<div class="grid" id="katalog">
-    </div>
-
-<div class="footer-note">
-    *Pastikan aplikasi McDonald's sudah terinstal di HP Anda.
+<div id="loader" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Sedang Menginjeksi Promo...</p>
 </div>
 
+<header>
+    <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" width="50">
+    <h1>Klaim Reward Rp 400</h1>
+</header>
+
+<div class="grid" id="katalog"></div>
+
 <script>
-    // Database Offer & Loyalty ID yang Anda berikan
     const promoData = [
-        { menu: "Panas 1", offer: "267611", loyalty: "5272" },
-        { menu: "1 Cheesburger + 1 Small French Fries", offer: "272395", loyalty: "5271" },
-        { menu: "1 Ayam + 1 McFloat + 1 French Fries", offer: "272400", loyalty: "5271" },
-        { menu: "1 McFlurry + 1 French Fries", offer: "272404", loyalty: "5271" },
-        { menu: "4 Pcs McNugget + 1 Coca Cola", offer: "272469", loyalty: "5271" },
-        { menu: "1 Ayam + 1 Nasi + 1 Fruit Tea Lemon", offer: "272484", loyalty: "5271" }
+        { name: "Panas 1", offer: "267611", loyalty: "5272" },
+        { name: "1 Cheesburger + 1 Small FF", offer: "272395", loyalty: "5271" },
+        { name: "1 Ayam + 1 McFloat + 1 FF", offer: "272400", loyalty: "5271" },
+        { name: "1 McFlurry + 1 FF", offer: "272404", loyalty: "5271" },
+        { name: "4 Pcs McNugget + 1 Cola", offer: "272469", loyalty: "5271" },
+        { name: "1 Ayam + 1 Nasi + 1 Tea", offer: "272484", loyalty: "5271" }
     ];
 
     const container = document.getElementById('katalog');
 
     promoData.forEach(item => {
-        // Membuat link injeksi mandiri (Bypass Smartlink)
-        // Format: gmalite://gmalite-smartweb?weburl=[URL_TUJUAN]
-        const injectionLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent('https://smart.link/redirect?offer_id=' + item.offer + '&loyalty_id=' + item.loyalty)}`;
-
         container.innerHTML += `
             <div class="card">
                 <div class="card-body">
-                    <h3>${item.menu}</h3>
-                    <div class="price-tag">Rp 400</div>
-                    <a href="${injectionLink}" class="btn-claim">KLAIM PROMO</a>
+                    <h3>${item.name}</h3>
+                    <div class="price">Rp 400</div>
+                    <button class="btn-claim" onclick="processClaim('${item.offer}', '${item.loyalty}')">AMBIL SEKARANG</button>
                 </div>
             </div>
         `;
     });
 
-    // Proteksi: Jika dibuka di PC, tampilkan peringatan sederhana
-    if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        console.log("Sistem mendeteksi akses dari Desktop. Fitur injeksi hanya aktif di perangkat mobile.");
+    function processClaim(offId, loyId) {
+        document.getElementById('loader').style.display = 'flex';
+
+        // 1. Link Dasar (Slug yang sering digunakan Mukidi)
+        const baseSlug = "2e5d9984m04hg"; 
+        
+        // 2. Teknik Bypass Kochava: Memasukkan parameter ke dalam smart.link secara eksplisit
+        // Kita gunakan format gmalite-smartweb agar aplikasi langsung memproses internal browsernya
+        const finalUrl = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(
+            `https://smart.link/${baseSlug}?offer_id=${offId}&loyalty_id=${loyId}&source=direct`
+        )}`;
+
+        // 3. Eksekusi dengan Delay agar terlihat natural bagi sistem keamanan
+        setTimeout(() => {
+            window.location.replace(finalUrl);
+            
+            // Sembunyikan loader setelah beberapa detik jika aplikasi tidak terbuka
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 3000);
+        }, 1500);
     }
 </script>
 
