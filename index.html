@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Injector PRO</title>
+    <title>McD Injector</title>
     <style>
         body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
-        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .btn { display: block; padding: 18px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
     <div class="card">
         <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-        <h2>FN-INJECTOR</h2>
-        <p id="info">Klik tombol untuk menyuntikkan promo:</p>
-        <a href="#" id="link" class="btn">GAS INJECT!</a>
+        <h2>INJECTOR PROMO</h2>
+        <p id="info">Menghubungkan ke Aplikasi...</p>
+        <a href="#" id="btn-link" class="btn">BUKA APLIKASI</a>
     </div>
 
     <script>
-        const p = new URLSearchParams(window.location.search);
-        const id = p.get('id');
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        
         if (id) {
-            document.getElementById('info').innerText = "ID: " + id;
-            // Gunakan skema mcdonalds:// sebagai alternatif jika gmalite gagal
-            const target = "mcdonalds://GMA/OfferDetails?offerId=" + id + "&loyaltyId=5271";
-            document.getElementById('link').href = target;
+            document.getElementById('info').innerText = "Offer ID: " + id;
+            
+            // GUNAKAN UNIVERSAL LINK (HTTPS) BUKAN SCHEME (mcdonalds://)
+            // Ini agar Safari tidak mengeluarkan pesan "Alamat Tidak Sah"
+            const universalLink = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=5271`;
+            
+            document.getElementById('btn-link').href = universalLink;
+
+            // Coba buka otomatis
+            setTimeout(() => {
+                window.location.href = universalLink;
+            }, 1000);
         }
     </script>
 </body>
