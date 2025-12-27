@@ -1,76 +1,16 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>Injeksi Promo Aktif</title>
-    <style>
-        body { font-family: sans-serif; background: #f0f0f0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
-        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
-        .btn { background: #da291c; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
-    </style>
-</head>
-<body>
+function forceInject(offId, loyId) {
+    const mCode = "PaketNgemil12"; 
+    
+    // Format REDEEM langsung (Tanpa lewat Smartlink)
+    // Ini mencoba memicu jendela "Tukar Sekarang" yang ada di aplikasi
+    const directRedeem = `gmalite://offers/redeem?offer_id=${offId}&loyalty_id=${loyId}&code=${mCode}&is_mass_code=1&partner=Tiktok%20Live%20109.5`;
 
-    <h2 style="color: #da291c;">Pilih Voucher</h2>
-    <div class="grid" id="container"></div>
-
-<script>
-    const listPromo = [
-        { name: "Panas 1", off: "267611", loy: "5272" },
-        { name: "4 Pcs McNugget", off: "272469", loy: "5271" },
-        { name: "Ayam + Nasi", off: "272484", loy: "5271" }
-    ];
-
-    const box = document.getElementById('container');
-    listPromo.forEach(p => {
-        box.innerHTML += `
-            <div class="card">
-                <h3>${p.name}</h3>
-                <button class="btn" onclick="forceInject('${p.off}', '${p.loy}')">INJEK VOUCHER</button>
-            </div>
-        `;
-    });
-
-    function forceInject(offId, loyId) {
-        const slug = "2le1hb5pjyoo9"; 
-        const mCode = "PaketNgemil12"; 
-        
-        // PARAMETER RAHASIA: 
-        // Mukidi menambahkan 'source', 'site_id', dan 'creative_id' agar aplikasi 
-        // mengaktifkan fungsi klaim secara otomatis.
-        const trackingParams = new URLSearchParams({
-            offer_id: offId,
-            loyalty_id: loyId,
-            code: mCode,
-            is_mass_code: "1",
-            partner: "Tiktok Live 109.5",
-            source: "direct",
-            site_id: "facebook_ads",
-            creative_id: "promo_400",
-            ad_id: Math.floor(Math.random() * 1000000)
-        }).toString();
-
-        // JALUR TERKUAT: Gunakan Smartlink di dalam Smartweb
-        const finalTarget = `https://smart.link/${slug}?${trackingParams}`;
-        
-        // Untuk iOS, kita gunakan skema 'gmalite-smartweb' yang lebih dalam
-        const injectionLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
-
-        // Eksekusi
-        window.location.href = injectionLink;
-
-        // EMERGENCY FALLBACK: Jika tombol klaim tetap tidak muncul, 
-        // kita paksa aplikasi masuk ke mode 'Redeem Now'
-        setTimeout(() => {
-            if (!document.hidden) {
-                const forceRedeem = `gmalite://offers/redeem?offer_id=${offId}&loyalty_id=${loyId}&code=${mCode}&is_mass_code=1`;
-                window.location.href = forceRedeem;
-            }
-        }, 1500);
-    }
-</script>
-</body>
-</html>
+    // Kita jalankan dua kali dengan jeda singkat
+    window.location.href = directRedeem;
+    
+    setTimeout(() => {
+        // Jika tidak muncul, coba pemicu paksa ke WebView dengan mode 'Claim'
+        const forceView = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent('https://www.mcdonalds.co.id/offers/details?offer_id='+offId+'&view=claim')}`;
+        window.location.href = forceView;
+    }, 500);
+}
