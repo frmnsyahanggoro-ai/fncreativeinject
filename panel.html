@@ -1,56 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>McD Internal System</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #111; color: white; text-align: center; padding: 20px; }
-        .card { background: #222; border: 2px solid #da291c; border-radius: 20px; padding: 20px; margin-top: 20px; }
-        .id-text { font-family: monospace; font-size: 20px; color: #ffbc0d; background: #333; padding: 10px; border-radius: 10px; margin: 15px 0; display: block; }
-        .btn { background: #da291c; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
-        .step { font-size: 12px; color: #aaa; text-align: left; margin-bottom: 10px; }
-    </style>
-</head>
-<body>
+<script>
+function gas() {
+    var o = "272484"; // ID Ayam Nasi
+    var l = "5271";
 
-    <div class="card">
-        <h3>INJECTOR V3.5</h3>
-        <p class="step">1. Pilih menu yang ingin diinject:</p>
-        <select id="menu" style="width:100%; padding:10px; border-radius:8px;">
-            <option value="272484|5271">Ayam + Nasi + Lemon Tea</option>
-            <option value="272469|5271">McNugget + Cola</option>
-            <option value="267611|5272">Panas 1</option>
-        </select>
+    // KUNCI TERAKHIR: Gunakan 'onelink.me' sebagai tameng
+    // Ini adalah domain resmi yang digunakan McD untuk iklan di Instagram/Facebook
+    var officialBridge = "https://gmalite.onelink.me/vX8W/mukidi?offer_id=" + o + "&loyalty_id=" + l;
 
-        <p class="step">2. Klik tombol di bawah (Ini akan menyalin kode enkripsi):</p>
-        <button class="btn" onclick="copyAndDirect()">COPY & OPEN APP</button>
-        
-        <p style="font-size: 10px; color: #666;">Jika aplikasi terbuka tapi diam, kembali ke sini dan klik lagi.</p>
-    </div>
+    // Tembak menggunakan perintah 'smartweb' ke onelink
+    var finalCmd = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(officialBridge);
 
-    <script>
-        function copyAndDirect() {
-            var data = document.getElementById('menu').value.split('|');
-            var off = data[0];
-            var loy = data[1];
+    // Kirim perintah
+    window.location.href = finalCmd;
 
-            // Trik Mukidi: Gunakan URL mcdonalds asli sebagai perantara
-            var target = "gmalite://offers/details?offer_id=" + off + 
-                         "&loyalty_id=" + loy + 
-                         "&view=claim&is_mass_code=1&is_native=true";
-
-            // Eksekusi paksa dengan jeda singkat
-            // Gunakan skema 'smartweb' tapi menuju ke internal voucher
-            var smartweb = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent("https://www.mcdonalds.co.id/promo/details?offer_id="+off);
-
-            // Tembak sekaligus
-            window.location.href = smartweb;
-            
-            setTimeout(function() {
-                window.location.href = target;
-            }, 500);
-        }
-    </script>
-</body>
-</html>
+    // Paksa respon dengan jalur native (jeda 1 detik)
+    setTimeout(function() {
+        window.location.href = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l + "&view=claim";
+    }, 1000);
+}
+</script>
