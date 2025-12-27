@@ -1,34 +1,28 @@
 function injek(offId, loyId) {
-    var mCode = "PaketNgemil12";
-    var slug = "2le1hb5pjyoo9";
+    var mCode = "PaketNgemil12"; // PASTIKAN KODE INI FRESH
+    var partner = encodeURIComponent("Tiktok Live 109.5");
     
-    // STRATEGI: Jangan buat ID acak. 
-    // Kita biarkan Smartlink yang membuat ID-nya sendiri dan langsung meneruskannya ke App.
-    // Kita hapus parameter ko_click_id dari skrip agar tidak bentrok dengan ID asli dari Kochava.
-    
-    var targetUrl = "https://smart.link/" + slug + 
-                    "?offer_id=" + offId + 
-                    "&loyalty_id=" + loyId + 
+    // STRATEGI: Hilangkan is_mass_code jika terjadi Error 500
+    // Gunakan format URL yang paling minimalis untuk meminimalkan penolakan server
+    var targetUrl = "https://www.mcdonalds.co.id/offers/redeem/" + offId + 
+                    "?loyalty_id=" + loyId + 
                     "&code=" + mCode + 
-                    "&is_mass_code=1" +
-                    "&partner=Tiktok%20Live%20109.5";
+                    "&partner=" + partner;
 
-    // KUNCI iOS: Gunakan skema 'af_dp' (AppsFlyer/Kochava Deep Link) 
-    // yang dibungkus dalam gmalite-smartweb
+    // Gunakan skema gmalite-smartweb dengan enkripsi URL yang benar
     var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(targetUrl);
 
-    // EKSEKUSI 1: Buka Webview Smartlink (Ini akan mendaftarkan klik Anda secara sah)
+    // EKSEKUSI
     window.location.href = finalLink;
 
-    // EKSEKUSI 2: Force Native (Hanya jika webview gagal memunculkan tombol)
+    // Jika Error 500 tetap muncul, gunakan jalur alternatif tanpa "redeem" di URL
     setTimeout(function() {
         if (!document.hidden) {
-            // Gunakan path 'offers/v1/details' - ini path yang sering dipakai untuk memicu tombol klaim
-            var forcePath = "gmalite://offers/v1/details?offer_id=" + offId + 
+            var altTarget = "gmalite://offers/details?offer_id=" + offId + 
                             "&loyalty_id=" + loyId + 
                             "&code=" + mCode + 
-                            "&is_mass_code=1";
-            window.location.href = forcePath;
+                            "&force_claim=true";
+            window.location.href = altTarget;
         }
     }, 1500);
 }
