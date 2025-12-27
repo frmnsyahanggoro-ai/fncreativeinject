@@ -3,55 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Redirector Fix</title>
+    <title>Redirecting...</title>
     <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border-top: 6px solid #ffbc0d; max-width: 320px; }
-        .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 50px; }
-        .status { font-size: 12px; color: #999; margin-top: 10px; }
+        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #ffffff; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #ffbc0d; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .container { text-align: center; }
+        .btn-inject { display: inline-block; padding: 12px 24px; background: #db3434; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h3>Membuka Promo McD...</h3>
-        <p id="menu-name">Mencoba beberapa metode...</p>
-        <a href="#" id="open-btn" class="btn">KLIK JIKA TIDAK TERBUKA</a>
-        <div class="status" id="stat-log">Menghubungkan...</div>
-    </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        const stat = document.getElementById('stat-log');
-        const btn = document.getElementById('open-btn');
+<div class="container">
+    <div class="loader" id="loader"></div>
+    <h3 id="msg">Membuka Promo McD...</h3>
+    <a href="#" id="inject-link" class="btn-inject">BUKA MANUAL</a>
+</div>
 
-        if (id) {
-            // Daftar semua kemungkinan link yang bisa memicu aplikasi
-            const links = [
-                `mcdonalds://GMA/OfferDetails?offerId=${id}`,
-                `gmalite://gmalite-smartweb?weburl=https://smart.link/2e5d9984m04hg?offerId=${id}`,
-                `globalmcdonalds://GMA/OfferDetails?offerId=${id}`,
-                `https://scans.mcd.com/app/offer-details?offerId=${id}`,
-                `mcdonalds://offers/details?offerId=${id}`
-            ];
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const offerId = params.get('id');
+    const loyaltyId = "5271"; // Menggunakan ID yang paling umum dari data kamu
 
-            btn.onclick = (e) => {
-                e.preventDefault();
-                links.forEach((link, i) => {
-                    setTimeout(() => {
-                        stat.innerText = "Mencoba metode " + (i + 1) + "...";
-                        window.location.href = link;
-                    }, i * 1000);
-                });
-            };
+    if (offerId) {
+        // Skema yang paling ampuh untuk aplikasi McD Indonesia terbaru
+        const smartLink = "https://smart.link/2e5d9984m04hg";
+        const finalUrl = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(smartLink + '?offerId=' + offerId + '&loyaltyId=' + loyaltyId)}`;
+        
+        const injectBtn = document.getElementById('inject-link');
+        injectBtn.href = finalUrl;
+        injectBtn.style.display = 'inline-block';
 
-            // Jalankan otomatis
-            setTimeout(() => { btn.click(); }, 1000);
+        // Logika Redirect: Coba buka otomatis dalam 1 detik
+        setTimeout(() => {
+            window.location.href = finalUrl;
             
-        } else {
-            document.getElementById('menu-name').innerText = "ID Promo tidak ditemukan.";
-            btn.style.display = "none";
-        }
-    </script>
+            // Jika 2 detik kemudian masih di halaman ini, beri tahu user
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('msg').innerText = "Jika aplikasi tidak terbuka, klik tombol di bawah:";
+            }, 2000);
+        }, 1000);
+
+    } else {
+        document.getElementById('msg').innerText = "ID Promo tidak ditemukan.";
+        document.getElementById('loader').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
