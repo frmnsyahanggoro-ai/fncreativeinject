@@ -87,11 +87,7 @@
 
     <script>
         function suntik(urlTiny) {
-            // LOGIKA MUKIDI:
-            // Membuka SmartWeb baru yang memuat TinyURL
-            // TinyURL akan melempar Native Link
-            // Native Link diterima aplikasi -> Voucher Muncul
-            
+            // Script ini akan membuka SmartWeb baru yang memuat TinyURL
             var target = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(urlTiny);
             window.location.href = target;
         }
