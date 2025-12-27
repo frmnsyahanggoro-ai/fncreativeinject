@@ -3,77 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>McD Injector V2</title>
+    <title>McD Direct Injector</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #da291c; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { background: #ffffff; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 85%; max-width: 350px; text-align: center; }
-        .logo { width: 50px; margin-bottom: 15px; }
-        h2 { margin: 0 0 10px 0; color: #333; font-size: 20px; }
-        p { font-size: 12px; color: #666; margin-bottom: 25px; }
-        .input-group { text-align: left; margin-bottom: 15px; }
-        label { display: block; font-size: 11px; font-weight: bold; color: #999; margin-bottom: 5px; text-transform: uppercase; padding-left: 5px; }
-        input { width: 100%; padding: 15px; border: 2px solid #f4f4f4; border-radius: 15px; font-size: 16px; box-sizing: border-box; outline: none; background: #f9f9f9; }
-        input:focus { border-color: #ffbc0d; background: #fff; }
-        .btn-inject { background: #ffbc0d; color: #222; border: none; padding: 18px; border-radius: 15px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        body { font-family: -apple-system, sans-serif; background: #222; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #fff; padding: 30px; border-radius: 25px; width: 85%; max-width: 340px; text-align: center; border-bottom: 5px solid #ffbc0d; }
+        .logo { width: 50px; margin-bottom: 10px; }
+        h2 { margin: 10px 0; font-size: 22px; color: #333; }
+        .desc { font-size: 11px; color: #888; margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; margin-bottom: 12px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: #da291c; }
+        .btn { background: #da291c; color: #fff; border: none; padding: 18px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="box">
+    <div class="card">
         <img src="https://www.mcdonalds.co.id/assets/img/common/mcdonalds_logo.png" class="logo">
-        <h2>Smart Injector</h2>
-        <p>Input ID dan tekan inject untuk membuka aplikasi.</p>
+        <h2>Panel Injeksi</h2>
+        <p class="desc">Metode Direct Tracking (Bypass 404)</p>
 
-        <div class="input-group">
-            <label>Offer ID</label>
-            <input type="number" id="off" placeholder="27xxxx" pattern="[0-9]*">
-        </div>
+        <input type="number" id="off" placeholder="Offer ID (27xxxx)" inputmode="numeric">
+        <input type="number" id="loy" placeholder="Loyalty ID (5xxx)" inputmode="numeric">
 
-        <div class="input-group">
-            <label>Loyalty ID</label>
-            <input type="number" id="loy" placeholder="5xxx" pattern="[0-9]*">
-        </div>
-
-        <button class="btn-inject" onclick="startInject()">INJECT KE APLIKASI</button>
+        <button class="btn" onclick="gasInjek()">BUKA DI APLIKASI</button>
     </div>
 
     <script>
-        function startInject() {
+        function gasInjek() {
             var o = document.getElementById('off').value;
             var l = document.getElementById('loy').value;
 
             if (o == "" || l == "") {
-                alert("Harap masukkan ID!");
+                alert("ID tidak boleh kosong!");
                 return;
             }
 
-            // --- RAHASIA MUKIDI UNTUK BYPASS 404 ---
-            // Kita tidak langsung menembak URL mcdonalds.co.id
-            // Tapi kita lewatkan melalui Smartlink Slug agar aplikasi mendapatkan 'Session'
+            // --- PERUBAHAN BESAR ---
+            // Kita tidak menggunakan domain mcdonalds.co.id
+            // Kita gunakan domain tracking Kochava (Smartlink) sebagai JEMBATAN
+            // Slug ini adalah yang paling stabil untuk region Indonesia
+            var slug = "2le1hb5pjyoo9"; 
             
-            var slug = "2le1hb5pjyoo9"; // Slug tracking resmi
-            var timestamp = new Date().getTime();
-            
-            // Kita susun URL agar dibaca sebagai 'Direct Campaign' oleh aplikasi
+            // Format URL Tracking yang tidak akan 404 karena ini adalah endpoint DATA
             var trackingUrl = "https://smart.link/" + slug + 
                               "?offer_id=" + o + 
                               "&loyalty_id=" + l + 
-                              "&view=claim" + 
-                              "&time=" + timestamp;
+                              "&site_id=MUKIDI_INJECT" + 
+                              "&deeplink_path=offers%2Fdetails%3Foffer_id%3D" + o + "%26loyalty_id%3D" + l;
 
-            // Membuka aplikasi melalui internal browser (Smartweb)
-            // Ini akan membuat aplikasi melakukan 'handshake' dengan server Kochava dulu baru membuka halamannya
+            // Kita tembak menggunakan gmalite-smartweb
             var finalDeepLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(trackingUrl);
 
             window.location.href = finalDeepLink;
 
-            // Backup Native Path (Jalur Belakang)
+            // Backup Native (Jika Smartlink gagal, paksa ke modul internal aplikasi)
             setTimeout(function() {
                 if (!document.hidden) {
-                    // Path ini langsung masuk ke modul detail tanpa lewat web
+                    // Jalur Native murni tanpa web sama sekali
                     window.location.href = "gmalite://offers/details?offer_id=" + o + "&loyalty_id=" + l;
                 }
-            }, 1500);
+            }, 1200);
         }
     </script>
 
