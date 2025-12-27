@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Promo Redirect</title>
+    <title>McD Promo</title>
     <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f8f8f8; }
-        .card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; border-top: 8px solid #ffbc0d; width: 85%; max-width: 320px; }
-        .btn { display: block; margin-top: 25px; padding: 15px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(219, 52, 52, 0.3); }
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
+        .card { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 80%; }
+        .btn { display: block; margin-top: 20px; padding: 15px; background: #db3434; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h3 id="status">Membuka Aplikasi...</h3>
-        <p id="menu" style="font-size: 14px; color: #666;">Mohon tunggu sebentar</p>
-        <a href="#" id="go" class="btn">KLIK JIKA TIDAK TERBUKA</a>
+        <h3>Promo McD</h3>
+        <p id="info">Klik tombol di bawah untuk membuka promo</p>
+        <a href="#" id="link-mcd" class="btn">BUKA PROMO</a>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
-        const loyalty = "5271"; // Default loyalty ID kamu
-        
-        if (id) {
-            document.getElementById('menu').innerText = "ID Promo: " + id;
-            
-            // FORMAT TERKUAT: Menggunakan link HTTPS resmi yang terdaftar di sistem iOS
-            // Jika link ini dibuka di Safari, iOS secara otomatis akan bertanya "Open in McDonald's?"
-            const finalLink = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${loyalty}`;
-            
-            document.getElementById('go').href = finalLink;
+        const loyalty = "5271";
 
-            // Eksekusi otomatis
-            window.location.replace(finalLink);
+        if (id) {
+            // Kita gunakan format link HTTPS mcd.com yang paling standar
+            const finalURL = `https://scans.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${loyalty}`;
+            document.getElementById('link-mcd').href = finalURL;
+            
+            // Coba buka otomatis sekali saja
+            window.location.href = finalURL;
+        } else {
+            document.getElementById('info').innerText = "ID Promo tidak ditemukan.";
         }
     </script>
 </body>
