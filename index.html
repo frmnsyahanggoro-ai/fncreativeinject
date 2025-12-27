@@ -1,40 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifikasi Keamanan | McDonald's</title>
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <style>
-        body { background-color: #111; color: white; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .card { background: #222; padding: 30px; border-radius: 15px; text-align: center; border: 1px solid #ffbc0d; box-shadow: 0 0 20px rgba(255, 188, 13, 0.2); }
-        h2 { color: #ffbc0d; margin-top: 0; }
-        .h-captcha { margin: 20px 0; }
-        #redirect-msg { display: none; color: #ffbc0d; font-weight: bold; }
-    </style>
+    <title>redirect</title>
 </head>
 <body>
-
-    <div class="card">
-        <h2>Keamanan McDonald's</h2>
-        <p>Selesaikan verifikasi untuk melihat voucher Anda.</p>
-        
-        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-callback="finish"></div>
-        
-        <p id="redirect-msg">Verifikasi Berhasil! Membuka Voucher...</p>
-    </div>
-
-    <script>
-        function finish() {
-            // Sembunyikan captcha, tampilkan pesan
-            document.querySelector('.h-captcha').style.display = 'none';
-            document.getElementById('redirect-msg').style.display = 'block';
-            
-            // PAKSA KE LINK MCD (Bukan Discord)
-            setTimeout(() => {
-                window.location.replace("https://bts-360.mcdonalds.co.id/cas/check-voucher");
-            }, 1500);
-        }
-    </script>
+    <a href="#">
+        Click here for Inject gmalite-smartweb
+    </a>
 </body>
 </html>
