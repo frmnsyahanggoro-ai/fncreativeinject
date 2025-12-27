@@ -3,24 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Injector</title>
+    <title>Redirecting...</title>
     <style>
         body { font-family: -apple-system, sans-serif; background: #FFBC0D; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 40px 20px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .btn-mcd { display: block; padding: 20px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 25px; }
+        .card { background: white; padding: 40px 20px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .btn-mcd { display: block; padding: 20px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 25px; border: none; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-    <h2 style="color: #333; margin-top: 20px;">INJECT READY</h2>
-    <p style="color: #666; font-size: 14px;">Klik tombol merah untuk membuka promo langsung di aplikasi.</p>
+    <h2 style="color: #333; margin-top: 20px;">INJECT SIAP</h2>
+    <p style="color: #666; font-size: 14px;">Klik tombol di bawah untuk klaim promo.</p>
     
-    <a href="https://u.mcd.com/app/offer-details?offerId=272489" class="btn-mcd">KLAIM VOUCHER</a>
-    
-    <p style="font-size: 10px; color: #aaa; margin-top: 20px;">v9.0 - Anti Blokir Safari</p>
+    <button onclick="inject()" class="btn-mcd">BUKA PROMO</button>
 </div>
+
+<script>
+    function inject() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const offerId = urlParams.get('id') || '272489';
+        
+        // JALUR 1: Jalur Internal Indonesia
+        const link1 = "mcdonalds-id://GMA/OfferDetails?offerId=" + offerId;
+        
+        // JALUR 2: Jalur Global
+        const link2 = "mcdonalds://GMA/OfferDetails?offerId=" + offerId;
+
+        // Coba jalur Indonesia dulu
+        window.location.href = link1;
+
+        // Jika tidak ada respon, coba jalur global
+        setTimeout(function() {
+            window.location.href = link2;
+        }, 800);
+    }
+</script>
 
 </body>
 </html>
