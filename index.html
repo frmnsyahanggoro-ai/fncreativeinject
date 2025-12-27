@@ -1,51 +1,43 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>McD Injector - fncreative</title>
     <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
-        .card { background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; width: 85%; max-width: 320px; }
-        .mcd-logo { width: 80px; margin-bottom: 20px; }
-        .btn-inject { display: block; padding: 18px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 20px; box-shadow: 0 5px 15px rgba(219,52,52,0.4); }
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #FFBC0D; }
+        .card { background: white; padding: 40px; border-radius: 30px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .btn { display: block; padding: 18px; background: #DB3434; color: white; text-decoration: none; border-radius: 15px; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
+        <h2>Klaim Promo</h2>
+        <p id="promo-info" style="color:#666;">Menghubungkan...</p>
+        <a href="#" id="btn-link" class="btn">INJECT PROMO</a>
+    </div>
 
-<div class="card">
-    <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" class="mcd-logo">
-    <h2 style="margin:0; color:#333;">Klaim Promo</h2>
-    <p id="promo-id" style="color:#666; font-size:14px; margin-top:10px;">Menghubungkan...</p>
-    
-    <a href="#" id="claim-link" class="btn-inject">INJECT PROMO</a>
-    
-    <p style="font-size:10px; color:#aaa; margin-top:20px;">fncreative bypass system</p>
-</div>
-
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    
-    if (id) {
-        document.getElementById('promo-id').innerText = "Offer ID: " + id;
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
         
-        // Link yang digunakan untuk memicu aplikasi secara langsung
-        const smartLink = "https://smart.link/2e5d9984m04hg";
-        const deepLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(smartLink + "?offerId=" + id + "&loyaltyId=5271");
-        
-        const btn = document.getElementById('claim-link');
-        btn.href = deepLink;
+        if (id) {
+            document.getElementById('promo-info').innerText = "Offer ID: " + id;
+            
+            // LINK INI LANGSUNG KE APLIKASI, TIDAK KE WEB MUKIDI
+            const smartLink = "https://smart.link/2e5d9984m04hg";
+            const deepLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(smartLink + "?offerId=" + id + "&loyaltyId=5271");
+            
+            document.getElementById('btn-link').href = deepLink;
 
-        // JANGAN gunakan otomatis redirect ke web lain
-        // Jika ingin otomatis ke APLIKASI, gunakan ini:
-        setTimeout(() => {
-            window.location.href = deepLink;
-        }, 1500);
-    } else {
-        document.getElementById('promo-id').innerText = "Gunakan link: ?id=272489";
-    }
-</script>
-
+            // Buka aplikasi otomatis dalam 1 detik
+            setTimeout(() => {
+                window.location.href = deepLink;
+            }, 1000);
+        } else {
+            document.getElementById('promo-info').innerText = "Gunakan ID di URL";
+        }
+    </script>
 </body>
 </html>
