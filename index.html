@@ -3,64 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McD Promo Redirector</title>
+    <title>McD Redirector</title>
     <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f7f7f7; }
-        .card { background: white; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; max-width: 350px; width: 90%; border-top: 8px solid #ffbc0d; }
-        h2 { color: #292929; margin-bottom: 5px; font-size: 22px; }
-        .details { color: #666; margin-bottom: 25px; font-size: 14px; line-height: 1.5; white-space: pre-line; }
-        .btn { display: block; padding: 16px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 14px; font-size: 16px; transition: 0.2s; box-shadow: 0 4px 10px rgba(219, 52, 52, 0.3); }
-        .btn:active { transform: scale(0.97); }
+        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f4; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border-top: 6px solid #ffbc0d; max-width: 320px; }
+        .btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: #db3434; color: white; font-weight: bold; text-decoration: none; border-radius: 50px; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h3 id="title">Membuka Promo...</h3>
+        <p id="menu-name">Menghubungkan ke Aplikasi McD</p>
+        <a href="#" id="manual-link" class="btn">BUKA SEKARANG</a>
+    </div>
 
-<div class="card">
-    <h2 id="title">Memuat Promo...</h2>
-    <p class="details" id="desc">Mohon tunggu sebentar</p>
-    <a href="#" id="open-btn" class="btn">BUKA DI APLIKASI</a>
-</div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const display = document.getElementById('menu-name');
+        const btn = document.getElementById('manual-link');
 
-<script>
-    const promoData = {
-        "267611": { name: "Panas 1", loyalty: "5272" },
-        "272395": { name: "1 Cheesburger + 1 Small French Fries", loyalty: "5271" },
-        "272447": { name: "McFlurry + Kentang", loyalty: "5271" },
-        "272478": { name: "2 McSpicy + 1 Nasi + Fruit Tea (27k)", loyalty: "5271" },
-        "272489": { name: "McFlurry + Kentang (13k)", loyalty: "5271" }
-        // ... (tambahkan ID lainnya jika perlu)
-    };
+        // Gunakan Loyalty ID 5271 sebagai default jika tidak ditentukan
+        const loyaltyId = "5271";
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    const titleEl = document.getElementById('title');
-    const descEl = document.getElementById('desc');
-    const btnEl = document.getElementById('open-btn');
+        if (id) {
+            display.innerText = "Mencoba membuka Offer ID: " + id;
+            
+            // Daftar skema alamat yang paling mungkin berhasil (GMA Indonesia)
+            const links = [
+                `globalmcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${loyaltyId}`,
+                `mcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${loyaltyId}`,
+                `https://go.mcd.com/app/offer-details?offerId=${id}`,
+                `mcdonalds://offers/details/${id}`
+            ];
 
-    if (id && promoData[id]) {
-        const promo = promoData[id];
-        titleEl.innerText = promo.name;
-        descEl.innerText = `Offer ID: ${id}\nLoyalty ID: ${promo.loyalty}`;
-        
-        // --- PERUBAHAN UTAMA DISINI ---
-        // Kita menggunakan Universal Link mcd.com yang memicu iOS membuka aplikasi
-        const universalLink = `https://u.mcd.com/app/offer-details?offerId=${id}&loyaltyId=${promo.loyalty}`;
-        const schemeLink = `mcdonalds://GMA/OfferDetails?offerId=${id}&loyaltyId=${promo.loyalty}`;
-        
-        btnEl.href = universalLink;
+            function tryAllLinks() {
+                links.forEach((link, index) => {
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, index * 800); // Mencoba satu per satu setiap 0.8 detik
+                });
+            }
 
-        // Coba buka dengan Universal Link terlebih dahulu
-        window.location.href = universalLink;
+            btn.onclick = (e) => {
+                e.preventDefault();
+                tryAllLinks();
+            };
 
-        // Jika dalam 2 detik tidak pindah, coba paksa pakai Scheme
-        setTimeout(() => {
-            window.location.href = schemeLink;
-        }, 2000);
-        
-    } else {
-        titleEl.innerText = "Promo Tidak Ditemukan";
-        btnEl.style.display = "none";
-    }
-</script>
+            // Jalankan otomatis
+            setTimeout(tryAllLinks, 1000);
+            
+        } else {
+            display.innerText = "Error: ID tidak ditemukan.";
+            btn.style.display = "none";
+        }
+    </script>
 </body>
 </html>
