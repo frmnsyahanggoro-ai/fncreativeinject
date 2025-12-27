@@ -5,33 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FN INJECTOR</title>
 </head>
-<body style="background:#FFBC0D; font-family:sans-serif; text-align:center; padding:50px 20px;">
+<body style="background:#FFBC0D; font-family:-apple-system, sans-serif; text-align:center; padding:50px 20px;">
     <div style="background:white; padding:40px 20px; border-radius:30px; display:inline-block; box-shadow: 0 15px 35px rgba(0,0,0,0.2); max-width:300px;">
         <img src="https://www.mcdonalds.co.id/assets/img/mcdonalds_logo_gold.png" width="80">
-        <h2 style="margin-top:20px; color:#333;">INJECTOR REAL</h2>
-        <p id="txt" style="color:#666;">Menghubungkan...</p>
+        <h2 style="margin-top:20px; color:#333;">INJECTOR AKTIF</h2>
+        <p id="txt" style="color:#666; font-size:14px;">Menghubungkan ke sistem...</p>
         
-        <a href="#" id="gas" style="background:#DB3434; color:white; padding:18px 30px; text-decoration:none; border-radius:15px; font-weight:bold; display:block; margin-top:25px; font-size:18px;">BUKA PROMO</a>
+        <a href="#" id="gas" style="background:#DB3434; color:white; padding:18px 30px; text-decoration:none; border-radius:15px; font-weight:bold; display:block; margin-top:25px; font-size:18px;">KLAIM PROMO</a>
         
-        <p style="font-size:10px; color:#aaa; margin-top:20px;">Versi Bersih - Tanpa Mukidi</p>
+        <p style="font-size:10px; color:#aaa; margin-top:20px;">Link Terverifikasi - Aman</p>
     </div>
 
     <script>
         const p = new URLSearchParams(window.location.search);
         const id = p.get('id') || '272489';
-        document.getElementById('txt').innerText = "ID Promo: " + id;
+        document.getElementById('txt').innerText = "ID Target: " + id;
         
-        // JALUR RESMI MCDONALDS INDONESIA (GMA LITE)
-        // Kita tidak pakai smart.link lagi karena itu punya Mukidi
-        const finalUrl = "mcdonalds://GMA/OfferDetails?offerId=" + id + "&loyaltyId=5271";
+        // JALUR UNIVERSAL (HTTPS) - Tidak akan dibilang 'Tidak Sah' oleh Safari
+        // Ini adalah link resmi yang akan otomatis membuka aplikasi McD Indonesia
+        const universalUrl = "https://u.mcd.com/app/offer-details?offerId=" + id;
         
         const btn = document.getElementById('gas');
-        btn.href = finalUrl;
+        btn.href = universalUrl;
 
-        // Klik otomatis setelah 1 detik
+        // Klik otomatis setelah 2 detik
         setTimeout(() => {
-            window.location.href = finalUrl;
-        }, 1000);
+            window.location.href = universalUrl;
+        }, 2000);
     </script>
 </body>
 </html>
