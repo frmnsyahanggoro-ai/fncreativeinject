@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Redirect</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #eee; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); text-align: center; max-width: 300px; }
+        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #db3434; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { color: #333; font-size: 18px; margin: 10px 0; }
+        p { color: #777; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="loader"></div>
+        <h2 id="msg">Membuka Aplikasi...</h2>
+        <p id="detail">Mohon tunggu sebentar</p>
+    </div>
+
+    <script>
+        // Database Offer ID kamu
+        const offers = {
+            "267611": "Panas 1",
+            "272395": "1 Cheesburger + 1 Small Fries",
+            "272400": "1 Ayam + 1 McFloat + 1 Fries",
+            "272447": "McFlurry + Kentang",
+            "272449": "Big Mac + McFlurry",
+            "272478": "2 McSpicy + 1 Nasi + Fruit Tea",
+            "272489": "McFlurry + Kentang (13k)"
+            // Tambahkan ID lain di sini sesuai daftar tadi
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const msg = document.getElementById('msg');
+        const detail = document.getElementById('detail');
+
+        if (id && offers[id]) {
+            detail.innerText = "Menu: " + offers[id];
+            
+            // Link ini yang didapat dari HTTP Toolkit
+            const deepLink = "mcdonalds://offers/details?offerId=" + id; 
+
+            setTimeout(() => {
+                window.location.href = deepLink;
+            }, 1500);
+        } else {
+            msg.innerText = "Link Tidak Valid";
+            detail.innerText = "Gunakan format: ?id=NOMOR_OFFER";
+        }
+    </script>
+</body>
+</html>
