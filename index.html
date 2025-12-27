@@ -1,76 +1,36 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>Injeksi Promo Aktif</title>
-    <style>
-        body { font-family: sans-serif; background: #f0f0f0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
-        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
-        .btn { background: #da291c; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
-    </style>
-</head>
-<body>
+function injek(offId, loyId) {
+    var mCode = "PaketNgemil12";
+    var slug = "2le1hb5pjyoo9";
+    
+    // RAHASIA: Mukidi menggunakan ko_click_id. 
+    // Kita buat ID acak yang formatnya mirip milik Mukidi (ko_ + 20 karakter alfanumerik)
+    var randomKoId = "ko_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 10);
 
-    <h2 style="color: #da291c;">Pilih Voucher</h2>
-    <div class="grid" id="container"></div>
+    // 1. Susun URL Tracking dengan ko_click_id
+    var trackingUrl = "https://smart.link/" + slug + 
+                      "?offer_id=" + offId + 
+                      "&loyalty_id=" + loyId + 
+                      "&code=" + mCode + 
+                      "&is_mass_code=1" +
+                      "&ko_click_id=" + randomKoId + // <--- INI KUNCINYA
+                      "&partner=Tiktok%20Live%20109.5";
 
-<script>
-    const listPromo = [
-        { name: "Panas 1", off: "267611", loy: "5272" },
-        { name: "4 Pcs McNugget", off: "272469", loy: "5271" },
-        { name: "Ayam + Nasi", off: "272484", loy: "5271" }
-    ];
+    // 2. Gunakan Protokol Smartweb untuk membungkus tracking tersebut
+    var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodeURIComponent(trackingUrl);
 
-    const box = document.getElementById('container');
-    listPromo.forEach(p => {
-        box.innerHTML += `
-            <div class="card">
-                <h3>${p.name}</h3>
-                <button class="btn" onclick="forceInject('${p.off}', '${p.loy}')">INJEK VOUCHER</button>
-            </div>
-        `;
-    });
+    // EKSEKUSI
+    window.location.href = finalLink;
 
-    function forceInject(offId, loyId) {
-        const slug = "2le1hb5pjyoo9"; 
-        const mCode = "PaketNgemil12"; 
-        
-        // PARAMETER RAHASIA: 
-        // Mukidi menambahkan 'source', 'site_id', dan 'creative_id' agar aplikasi 
-        // mengaktifkan fungsi klaim secara otomatis.
-        const trackingParams = new URLSearchParams({
-            offer_id: offId,
-            loyalty_id: loyId,
-            code: mCode,
-            is_mass_code: "1",
-            partner: "Tiktok Live 109.5",
-            source: "direct",
-            site_id: "facebook_ads",
-            creative_id: "promo_400",
-            ad_id: Math.floor(Math.random() * 1000000)
-        }).toString();
-
-        // JALUR TERKUAT: Gunakan Smartlink di dalam Smartweb
-        const finalTarget = `https://smart.link/${slug}?${trackingParams}`;
-        
-        // Untuk iOS, kita gunakan skema 'gmalite-smartweb' yang lebih dalam
-        const injectionLink = `gmalite://gmalite-smartweb?weburl=${encodeURIComponent(finalTarget)}`;
-
-        // Eksekusi
-        window.location.href = injectionLink;
-
-        // EMERGENCY FALLBACK: Jika tombol klaim tetap tidak muncul, 
-        // kita paksa aplikasi masuk ke mode 'Redeem Now'
-        setTimeout(() => {
-            if (!document.hidden) {
-                const forceRedeem = `gmalite://offers/redeem?offer_id=${offId}&loyalty_id=${loyId}&code=${mCode}&is_mass_code=1`;
-                window.location.href = forceRedeem;
-            }
-        }, 1500);
-    }
-</script>
-</body>
-</html>
+    // 3. EMERGENCY FALLBACK (Jika tombol masih belum muncul)
+    setTimeout(function() {
+        if (!document.hidden) {
+            // Paksa masuk ke layar konfirmasi dengan ID sesi yang sama
+            var nativeRedeem = "gmalite://offers/redeem?offer_id=" + offId + 
+                               "&loyalty_id=" + loyId + 
+                               "&code=" + mCode + 
+                               "&is_mass_code=1" +
+                               "&ko_click_id=" + randomKoId;
+            window.location.href = nativeRedeem;
+        }
+    }, 1200);
+}
