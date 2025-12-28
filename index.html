@@ -2,66 +2,74 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FN LAUNCHER VIP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FN ENCODED INJECTOR</title>
     <style>
-        :root { --mcd-red: #da291c; --mcd-yellow: #ffbc0d; }
-        body { 
-            font-family: -apple-system, sans-serif; 
-            background-color: #f4f4f4; margin: 0; padding: 20px; text-align: center; 
-        }
-        .box { 
-            background: white; border-radius: 20px; padding: 25px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 20px;
-        }
-        h1 { color: var(--mcd-red); font-weight: 900; margin: 0; letter-spacing: -1px; }
-        p { color: #666; font-size: 13px; margin: 5px 0 20px; }
+        body { font-family: -apple-system, sans-serif; padding: 20px; text-align: center; background: #f0f0f0; }
+        .box { background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1 { color: #da291c; margin-bottom: 5px; }
+        p { font-size: 12px; color: #666; margin-bottom: 20px; }
         
-        .btn {
-            display: block; width: 100%; padding: 18px 0; margin-bottom: 15px;
-            border-radius: 12px; font-weight: 800; font-size: 15px;
-            text-decoration: none; border: none; cursor: pointer;
-            transition: transform 0.1s;
+        .btn { 
+            display: block; width: 100%; padding: 15px 0; margin-bottom: 10px;
+            border-radius: 50px; border: none; font-weight: bold; font-size: 14px;
+            cursor: pointer; text-decoration: none; color: black;
         }
-        .btn:active { transform: scale(0.97); }
-        
-        /* TOMBOL 1: MENGGUNAKAN SMART LINK RESMI (HASIL LOG) */
-        .btn-smart { 
-            background: var(--mcd-yellow); color: black; 
-            box-shadow: 0 4px 0 #d49c0a; 
-        }
-
-        /* TOMBOL 2: INJEK MANUAL (BACKUP) */
-        .btn-manual { 
-            background: #222; color: white; 
-            box-shadow: 0 4px 0 #000; 
-        }
+        .btn-yellow { background: #ffbc0d; box-shadow: 0 4px 0 #d49c0a; }
+        .btn-black { background: #222; color: #fff; box-shadow: 0 4px 0 #000; }
+        .btn:active { transform: translateY(3px); box-shadow: none; }
     </style>
 </head>
 <body>
 
     <div class="box">
         <h1>FN CREATIVE</h1>
-        <p>VIP BYPASS • SMART LINK DETECTED</p>
+        <p>SYSTEM: URL ENCODED (ANTI-SILENT)</p>
 
-        <a class="btn btn-smart" href="gmalite://gmalite-smartweb?weburl=https://smart.link/2ggvrfji7sxi2">
-            🚀 AUTO INJECT (SMART LINK)
-        </a>
+        <button class="btn btn-yellow" onclick="suntik('https://tinyurl.com/479wbat5')">
+            🍚 CLAIM AYAM NASI (TinyURL)
+        </button>
 
-        <a class="btn btn-smart" style="background:#fff; border:2px solid #ffbc0d" href="gmalite://gmalite-smartweb?weburl=https://tinyurl.com/479wbat5">
-            🍚 CLAIM AYAM NASI (FN LINK)
-        </a>
+        <button class="btn btn-yellow" onclick="suntik('https://smart.link/2ggvrfji7sxi2')">
+            🚀 CLAIM VIP (Smart Link)
+        </button>
 
-        <hr style="border:0; border-top:1px dashed #ddd; margin:20px 0;">
+        <hr>
 
-        <p>Jika auto gagal, copy kode & redeem manual:</p>
-        <div style="background:#eee; padding:10px; border-radius:8px; font-family:monospace; margin-bottom:10px;">
-            12LemonKrispy
-        </div>
-        <a class="btn btn-manual" href="gmalite://promocode">
-            📋 BUKA HALAMAN REDEEM
-        </a>
+        <p>Jika masih diam, pakai tombol hitam ini:</p>
+        <div id="codeArea" style="background:#eee; padding:5px; margin-bottom:5px; font-family:monospace;">12LemonKrispy</div>
+        <button class="btn btn-black" onclick="manualCode()">
+            📋 COPY KODE & BUKA APP
+        </button>
     </div>
+
+    <script>
+        function suntik(urlTarget) {
+            // RAHASIA PERBAIKAN: ENCODEURIComponent
+            // Ini mengubah 'https://...' menjadi 'https%3A%2F%2F...'
+            // Supaya aplikasi McD tidak tersedak membacanya.
+            
+            var encodedUrl = encodeURIComponent(urlTarget);
+            var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodedUrl;
+            
+            // Eksekusi
+            window.location.href = finalLink;
+            
+            // Fallback (Force Open)
+            setTimeout(function(){
+                window.location.href = finalLink;
+            }, 500);
+        }
+
+        function manualCode() {
+            // Copy Kode
+            var text = document.getElementById("codeArea").innerText;
+            navigator.clipboard.writeText(text);
+            alert("Kode " + text + " Disalin! Silakan Paste.");
+            // Buka Halaman Redeem
+            window.location.href = "gmalite://promocode";
+        }
+    </script>
 
 </body>
 </html>
