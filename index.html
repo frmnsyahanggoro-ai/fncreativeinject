@@ -1,73 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FN ENCODED INJECTOR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FN VIP INJECTOR</title>
     <style>
-        body { font-family: -apple-system, sans-serif; padding: 20px; text-align: center; background: #f0f0f0; }
-        .box { background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        h1 { color: #da291c; margin-bottom: 5px; }
-        p { font-size: 12px; color: #666; margin-bottom: 20px; }
+        body { font-family: -apple-system, Helvetica, Arial, sans-serif; background: #f8f9fa; margin: 0; padding: 0; color: #333; }
         
-        .btn { 
-            display: block; width: 100%; padding: 15px 0; margin-bottom: 10px;
-            border-radius: 50px; border: none; font-weight: bold; font-size: 14px;
-            cursor: pointer; text-decoration: none; color: black;
+        main.wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        
+        .card {
+            background: white; border-radius: 20px; padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); width: 100%; max-width: 380px;
+            text-align: center; border: 1px solid #eee;
         }
-        .btn-yellow { background: #ffbc0d; box-shadow: 0 4px 0 #d49c0a; }
-        .btn-black { background: #222; color: #fff; box-shadow: 0 4px 0 #000; }
-        .btn:active { transform: translateY(3px); box-shadow: none; }
+
+        .header { margin-bottom: 25px; }
+        .title { color: #da291c; font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 5px; }
+        .subtitle { color: #666; font-size: 13px; font-weight: 500; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 18px 0; margin-bottom: 12px;
+            border-radius: 14px; font-size: 15px; font-weight: 700;
+            text-decoration: none; transition: transform 0.1s;
+            box-sizing: border-box; border: none; cursor: pointer;
+        }
+        .btn:active { transform: scale(0.96); }
+
+        /* TOMBOL UTAMA (KUNING) - SMART LINK BARU */
+        .btn-gold { 
+            background: #ffbc0d; color: #000; 
+            box-shadow: 0 4px 15px rgba(255, 188, 13, 0.4); 
+        }
+
+        /* TOMBOL CADANGAN (HITAM) */
+        .btn-black { 
+            background: #222; color: #fff; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+        }
+
+        .code-display {
+            background: #f4f4f4; padding: 12px; border-radius: 8px;
+            font-family: monospace; font-size: 18px; letter-spacing: 1px;
+            margin: 15px 0 10px; color: #333; font-weight: 800; border: 1px dashed #ccc;
+        }
+        
+        .status-dot {
+            height: 8px; width: 8px; background-color: #28a745;
+            border-radius: 50%; display: inline-block; margin-right: 5px;
+        }
+        
+        .footer { margin-top: 30px; font-size: 10px; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>FN CREATIVE</h1>
-        <p>SYSTEM: URL ENCODED (ANTI-SILENT)</p>
+    <main class="wrapper">
+        <div class="card">
+            <div class="header">
+                <div class="title">FN CREATIVE</div>
+                <div class="subtitle"><span class="status-dot"></span>Target Locked: 3poewv26lgso9</div>
+            </div>
 
-        <button class="btn btn-yellow" onclick="suntik('https://tinyurl.com/479wbat5')">
-            🍚 CLAIM AYAM NASI (TinyURL)
-        </button>
+            <a href="gmalite://gmalite-smartweb?weburl=https://smart.link/3poewv26lgso9" class="button btn btn-gold">
+                🚀 AUTO INJECT (NEW LINK)
+            </a>
 
-        <button class="btn btn-yellow" onclick="suntik('https://smart.link/2ggvrfji7sxi2')">
-            🚀 CLAIM VIP (Smart Link)
-        </button>
+            <div style="margin-top:25px; font-size:12px; color:#555; font-weight:600;">MANUAL BYPASS</div>
+            
+            <div class="code-display" id="myCode">12LemonKrispy</div>
+            
+            <button onclick="copyManual()" class="button btn btn-black">
+                📋 COPY & BUKA APLIKASI
+            </button>
 
-        <hr>
-
-        <p>Jika masih diam, pakai tombol hitam ini:</p>
-        <div id="codeArea" style="background:#eee; padding:5px; margin-bottom:5px; font-family:monospace;">12LemonKrispy</div>
-        <button class="btn btn-black" onclick="manualCode()">
-            📋 COPY KODE & BUKA APP
-        </button>
-    </div>
+            <div class="footer">
+                Engine v14.0 • Whitelist Protocol<br>
+                Source: SmartLink (Official)
+            </div>
+        </div>
+    </main>
 
     <script>
-        function suntik(urlTarget) {
-            // RAHASIA PERBAIKAN: ENCODEURIComponent
-            // Ini mengubah 'https://...' menjadi 'https%3A%2F%2F...'
-            // Supaya aplikasi McD tidak tersedak membacanya.
-            
-            var encodedUrl = encodeURIComponent(urlTarget);
-            var finalLink = "gmalite://gmalite-smartweb?weburl=" + encodedUrl;
-            
-            // Eksekusi
-            window.location.href = finalLink;
-            
-            // Fallback (Force Open)
-            setTimeout(function(){
-                window.location.href = finalLink;
-            }, 500);
-        }
-
-        function manualCode() {
-            // Copy Kode
-            var text = document.getElementById("codeArea").innerText;
-            navigator.clipboard.writeText(text);
-            alert("Kode " + text + " Disalin! Silakan Paste.");
-            // Buka Halaman Redeem
-            window.location.href = "gmalite://promocode";
+        function copyManual() {
+            var text = document.getElementById("myCode").innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Kode Berhasil Disalin!");
+                // Buka Halaman Redeem
+                window.location.href = "gmalite://promocode";
+            }, function() {
+                window.location.href = "gmalite://promocode";
+            });
         }
     </script>
 
