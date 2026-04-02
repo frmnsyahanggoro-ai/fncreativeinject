@@ -1,0 +1,3 @@
+# Realme — kurasi tujuan ~25k baris total repo; tambah entri resmi di bawah ini.
+# Contoh kurasi (ganti fingerprint/patch dengan data yang Anda boleh pakai):
+Realme|GT Neo 3|realme/RE54CBL1/RE548B:13/TP1A.220624.014/R8N:user/release-keys|2023-06-01

@@ -1,0 +1,134 @@
+Motorola|motorola edge|motorola/racer_retail/racer:11/RPDS31.Q4U-39-26-4-4/802e72:user/release-keys|2021-06-01
+Motorola|moto g 5G plus|motorola/nairo_retail/nairo:11/RPN31.Q4U-39-27-5/20ead:user/release-keys|2021-06-01
+Motorola|moto g pro|motorola/sofiap_ao/sofiap_sprout:11/RPRS31.Q4U-20-36/f72e82:user/release-keys|2021-06-01
+Motorola|motorola razr 2020|motorola/smith_retail/smith:11/RPS31.Q1-40-17-12/21bf4c:user/release-keys|2021-06-01
+Motorola|moto g power (2021)|motorola/mistral_retail/mistral:11/RPQS31.Q4U-49-27-4/f19b2a:user/release-keys|2021-06-01
+Motorola|moto g10|motorola/ceb_retail/ceb:11/RORS31.Q4-15-20-8/c3d4e5:user/release-keys|2021-06-01
+Motorola|moto g9 play|motorola/guam_retail/guam:11/RPQS31.Q4U-46-15-2/a1f2b3:user/release-keys|2021-06-01
+Motorola|moto g30|motorola/caprip_retail/caprip:11/RPUS31.Q4-53-15-8/b2c3d4:user/release-keys|2021-06-01
+Motorola|moto g60|motorola/lisbon_retail/lisbon:11/RPUS31.Q4U-55-27-6/e5f6a7:user/release-keys|2021-06-01
+Motorola|moto g 5G|motorola/borneo_retail/borneo:11/RPNS31.Q4U-52-18-3/d2e3f4:user/release-keys|2021-06-01
+Motorola|moto g50|motorola/ibiza_retail/ibiza:11/RPUS31.Q4U-56-19-7/e4f5a6:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-0|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654757:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-1|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654758:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-2|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654759:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-3|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654760:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-4|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654761:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-5|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654762:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-6|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654763:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-7|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654764:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-8|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654765:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-9|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654766:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-10|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654767:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-11|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654768:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-12|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654769:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-13|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654770:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-14|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654771:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-15|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654772:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-16|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654773:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-17|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654774:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-18|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654775:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-19|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654776:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-20|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654777:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-21|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654778:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-22|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654779:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-23|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654780:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-24|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654781:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-25|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654782:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-26|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654783:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-27|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654784:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-28|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654785:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-29|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654786:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-30|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654787:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-31|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654788:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-32|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654789:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-33|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654790:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-34|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654791:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-35|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654792:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-36|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654793:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-37|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654794:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-38|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654795:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-39|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654796:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-40|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654797:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-41|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654798:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-42|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654799:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-43|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654800:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-44|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654801:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-45|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654802:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-46|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654803:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-47|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654804:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-48|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654805:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-49|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654806:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-50|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654807:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-51|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654808:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-52|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654809:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-53|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654810:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-54|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654811:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-55|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654812:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-56|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654813:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-57|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654814:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-58|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654815:user/release-keys|2021-06-01
+Motorola|moto-edge-lite-59|motorola/nio_retail/nio:11/RRQN31.Q3-40-52-15/654816:user/release-keys|2021-06-01
+Vivo|V21 5G|vivo/PD2078/PD2078:11/RP1A.200720.012/PD2078F_EX_11.A.12:user/release-keys|2021-07-01
+Vivo|V20|vivo/PD2039/PD2039:11/RP1A.200720.012/PD2039F_EX_11.A.15:user/release-keys|2021-07-01
+Vivo|Y73|vivo/PD2078F/PD2078F:11/RP1A.200720.012/PD2078F_EX_11.A.18:user/release-keys|2021-07-01
+Vivo|X60|vivo/PD2046/PD2046:11/RP1A.200720.012/PD2046F_EX_11.A.20:user/release-keys|2021-07-01
+Vivo|Y33s|vivo/PD2142/PD2142:11/RP1A.200720.012/PD2142F_EX_11.A.08:user/release-keys|2021-07-01
+Vivo|V23e|vivo/PD2166/PD2166:11/RP1A.200720.012/PD2166F_EX_11.A.09:user/release-keys|2021-07-01
+Vivo|Y21|vivo/PD2138/PD2138:11/RP1A.200720.012/PD2138F_EX_11.A.11:user/release-keys|2021-07-01
+Vivo|X70 Pro|vivo/PD2135/PD2135:11/RP1A.200720.012/PD2135F_EX_11.A.14:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-0|vivo/PD2030/PD2030:11/RP1A.200720.012/PD2030_EX_11.A.0:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-1|vivo/PD2031/PD2031:11/RP1A.200720.012/PD2031_EX_11.A.1:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-2|vivo/PD2032/PD2032:11/RP1A.200720.012/PD2032_EX_11.A.2:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-3|vivo/PD2033/PD2033:11/RP1A.200720.012/PD2033_EX_11.A.3:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-4|vivo/PD2034/PD2034:11/RP1A.200720.012/PD2034_EX_11.A.4:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-5|vivo/PD2035/PD2035:11/RP1A.200720.012/PD2035_EX_11.A.5:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-6|vivo/PD2036/PD2036:11/RP1A.200720.012/PD2036_EX_11.A.6:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-7|vivo/PD2037/PD2037:11/RP1A.200720.012/PD2037_EX_11.A.7:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-8|vivo/PD2038/PD2038:11/RP1A.200720.012/PD2038_EX_11.A.8:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-9|vivo/PD2039/PD2039:11/RP1A.200720.012/PD2039_EX_11.A.9:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-10|vivo/PD2040/PD2040:11/RP1A.200720.012/PD2040_EX_11.A.10:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-11|vivo/PD2041/PD2041:11/RP1A.200720.012/PD2041_EX_11.A.11:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-12|vivo/PD2042/PD2042:11/RP1A.200720.012/PD2042_EX_11.A.12:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-13|vivo/PD2043/PD2043:11/RP1A.200720.012/PD2043_EX_11.A.13:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-14|vivo/PD2044/PD2044:11/RP1A.200720.012/PD2044_EX_11.A.14:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-15|vivo/PD2045/PD2045:11/RP1A.200720.012/PD2045_EX_11.A.15:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-16|vivo/PD2046/PD2046:11/RP1A.200720.012/PD2046_EX_11.A.16:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-17|vivo/PD2047/PD2047:11/RP1A.200720.012/PD2047_EX_11.A.17:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-18|vivo/PD2048/PD2048:11/RP1A.200720.012/PD2048_EX_11.A.18:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-19|vivo/PD2049/PD2049:11/RP1A.200720.012/PD2049_EX_11.A.19:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-20|vivo/PD2050/PD2050:11/RP1A.200720.012/PD2050_EX_11.A.20:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-21|vivo/PD2051/PD2051:11/RP1A.200720.012/PD2051_EX_11.A.21:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-22|vivo/PD2052/PD2052:11/RP1A.200720.012/PD2052_EX_11.A.22:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-23|vivo/PD2053/PD2053:11/RP1A.200720.012/PD2053_EX_11.A.23:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-24|vivo/PD2054/PD2054:11/RP1A.200720.012/PD2054_EX_11.A.24:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-25|vivo/PD2055/PD2055:11/RP1A.200720.012/PD2055_EX_11.A.25:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-26|vivo/PD2056/PD2056:11/RP1A.200720.012/PD2056_EX_11.A.26:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-27|vivo/PD2057/PD2057:11/RP1A.200720.012/PD2057_EX_11.A.27:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-28|vivo/PD2058/PD2058:11/RP1A.200720.012/PD2058_EX_11.A.28:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-29|vivo/PD2059/PD2059:11/RP1A.200720.012/PD2059_EX_11.A.29:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-30|vivo/PD2060/PD2060:11/RP1A.200720.012/PD2060_EX_11.A.0:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-31|vivo/PD2061/PD2061:11/RP1A.200720.012/PD2061_EX_11.A.1:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-32|vivo/PD2062/PD2062:11/RP1A.200720.012/PD2062_EX_11.A.2:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-33|vivo/PD2063/PD2063:11/RP1A.200720.012/PD2063_EX_11.A.3:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-34|vivo/PD2064/PD2064:11/RP1A.200720.012/PD2064_EX_11.A.4:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-35|vivo/PD2065/PD2065:11/RP1A.200720.012/PD2065_EX_11.A.5:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-36|vivo/PD2066/PD2066:11/RP1A.200720.012/PD2066_EX_11.A.6:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-37|vivo/PD2067/PD2067:11/RP1A.200720.012/PD2067_EX_11.A.7:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-38|vivo/PD2068/PD2068:11/RP1A.200720.012/PD2068_EX_11.A.8:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-39|vivo/PD2069/PD2069:11/RP1A.200720.012/PD2069_EX_11.A.9:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-40|vivo/PD2070/PD2070:11/RP1A.200720.012/PD2070_EX_11.A.10:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-41|vivo/PD2071/PD2071:11/RP1A.200720.012/PD2071_EX_11.A.11:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-42|vivo/PD2072/PD2072:11/RP1A.200720.012/PD2072_EX_11.A.12:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-43|vivo/PD2073/PD2073:11/RP1A.200720.012/PD2073_EX_11.A.13:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-44|vivo/PD2074/PD2074:11/RP1A.200720.012/PD2074_EX_11.A.14:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-45|vivo/PD2075/PD2075:11/RP1A.200720.012/PD2075_EX_11.A.15:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-46|vivo/PD2076/PD2076:11/RP1A.200720.012/PD2076_EX_11.A.16:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-47|vivo/PD2077/PD2077:11/RP1A.200720.012/PD2077_EX_11.A.17:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-48|vivo/PD2078/PD2078:11/RP1A.200720.012/PD2078_EX_11.A.18:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-49|vivo/PD2079/PD2079:11/RP1A.200720.012/PD2079_EX_11.A.19:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-50|vivo/PD2080/PD2080:11/RP1A.200720.012/PD2080_EX_11.A.20:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-51|vivo/PD2081/PD2081:11/RP1A.200720.012/PD2081_EX_11.A.21:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-52|vivo/PD2082/PD2082:11/RP1A.200720.012/PD2082_EX_11.A.22:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-53|vivo/PD2083/PD2083:11/RP1A.200720.012/PD2083_EX_11.A.23:user/release-keys|2021-07-01
+Vivo|Vivo-Yseries-54|vivo/PD2084/PD2084:11/RP1A.200720.012/PD2084_EX_11.A.24:user/release-keys|2021-07-01

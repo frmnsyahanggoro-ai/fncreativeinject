@@ -1,0 +1,10 @@
+*.zip
+.DS_Store
+Thumbs.db
+
+# Android (FN-CREATIVE-Control)
+FN-CREATIVE-Control/.gradle/
+FN-CREATIVE-Control/**/build/
+FN-CREATIVE-Control/local.properties
+FN-CREATIVE-Control/*.iml
+FN-CREATIVE-Control/.idea/

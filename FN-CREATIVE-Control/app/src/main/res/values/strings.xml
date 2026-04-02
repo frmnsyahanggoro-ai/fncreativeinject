@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FN CREATIVE Engine</string>
+    <string name="app_title">FN CREATIVE Engine</string>
+    <string name="app_tagline">Powered by FN CREATIVE</string>
+    <string name="section_dashboard">Dashboard status</string>
+    <string name="section_actions">Module actions</string>
+    <string name="section_manual">Manual profile</string>
+    <string name="dashboard_loading">…</string>
+    <string name="dashboard_empty">(no data)</string>
+    <string name="btn_refresh_dashboard">Refresh dashboard</string>
+    <string name="btn_enable_rotation">Enable rotation</string>
+    <string name="btn_disable_rotation">Disable rotation</string>
+    <string name="btn_update_database">Update database</string>
+    <string name="btn_device_info">Device info</string>
+    <string name="btn_view_log">View engine log</string>
+    <string name="btn_cli_menu">Toolkit menu (su)</string>
+    <string name="menu_toast">Starting su menu.sh (interactive sessions need a terminal app)</string>
+    <string name="menu_failed">Could not start menu</string>
+    <string name="hint_manual_model">Device model string</string>
+    <string name="btn_save_manual">Save manual profile</string>
+    <string name="manual_empty">Enter a model name</string>
+    <string name="manual_bad_chars">Use letters, numbers, space, and simple punctuation only</string>
+    <string name="manual_saved">Manual profile saved (reboot if needed)</string>
+    <string name="device_info_title">Device info</string>
+    <string name="log_title">Engine log</string>
+    <string name="result_title">Result</string>
+</resources>

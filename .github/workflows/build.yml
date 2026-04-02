@@ -1,0 +1,50 @@
+# Powered by FN CREATIVE — artefak ZIP modul setiap push ke main
+name: Build Module
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Pillow & build banner
+        run: |
+          pip install pillow
+          python3 tools/build_banner.py
+
+      - name: Stage GUI into module
+        run: |
+          mkdir -p module/gui
+          if [ -d gui ]; then
+            for f in gui/*; do
+              [ -f "$f" ] || continue
+              b=$(basename "$f")
+              case "$b" in
+              README.txt|*.md|.gitkeep) continue ;;
+              esac
+              cp -f "$f" module/gui/
+            done
+          fi
+
+      - name: Build ZIP
+        run: |
+          cd module
+          zip -r ../FN-CREATIVE-AutoProps-v25-Final.zip . -x "branding/*" -x "*.bak"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FN-CREATIVE-AutoProps-v25-Final
+          path: FN-CREATIVE-AutoProps-v25-Final.zip
